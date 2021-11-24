@@ -2,13 +2,15 @@
 import { FB_AUTH, FB_DB } from './components/_firebase'
 import { useEffect, useState } from "react";
 import Loading from './routes/Loading';
-import { BrowserRouter ,Routes, Route} from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './routes/Home';
 import Navigation from './components/navigation';
 import Auth from './routes/Auth';
+import { connect } from 'react-redux';
+import { ACTION } from './components/store';
 
-function App() {
-  const [isLogedIn, setIsLogedIn] = useState(false);
+function App({setUser,setSleep}) {
+  const [isLogedIn, setIsLogedIn] = useState(false); // 로그인중인지
   const [isLoading, setIsLoading] = useState(true); // 로딩중인지
 
   function dbTest() {
@@ -19,35 +21,44 @@ function App() {
     });
   }
 
+  FB_AUTH.authChange(user => {
+    if (user) { 
+      setIsLogedIn(true); 
+      const {displayName,uid,email} = user;
+      setUser({displayName,uid,email})
+    }
+    else { setIsLogedIn(false); }
+  })
+
   useEffect(() => {
-    FB_AUTH.authChange(user => { setIsLogedIn(true); 
-      console.log(user)
-    })
-    setIsLoading(false);
-  }, [])
+    FB_DB.get('sleep').then(res=>{
+      setSleep(res)
+      setIsLoading(false);
+  })
+}, [])
 
-  async function dbTest2() {
-    const dataArr = await FB_DB.get('sleep');
-    console.log(dataArr)
-  }
-
+  // console.log(isLogedIn)
   return (
-    isLoading ? <Loading /> :
+    isLogedIn ?
       <BrowserRouter>
-        <Navigation isLogedIn={isLogedIn}/>
-        {isLogedIn ? 
+        <Navigation isLogedIn={isLogedIn} />
+        {isLoading ?
+          <Loading />:
         <Routes>
-          <Route path='/*' element={<Home/>}></Route>
-        </Routes>
-        :<Auth></Auth>
-        }
+            <Route path='/*' element={<Home />}></Route>
+          </Routes>
+      }
       </BrowserRouter>
+          :
+      <Auth/>
   );
 }
 
-export default App;
+function mapDispatchProps(dispatch){
+  return {
+      setUser:(user) => dispatch(ACTION.setUser(user)),
+      setSleep:(user) => dispatch(ACTION.setSleep(user)),
+  }
+}
 
-<div className="App">
-
-
-      </div>
+export default connect(null,mapDispatchProps)(App);
