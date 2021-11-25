@@ -4,7 +4,7 @@ function Footer(){
     return <div className='footer-wrap'>
         <button>Date</button>
         <button>Home</button>
-        <button>DashBord</button>
+        <button>DashBorda</button>
     </div>
 }
 
