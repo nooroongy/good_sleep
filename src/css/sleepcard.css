@@ -1,0 +1,14 @@
+.sleepcard-wrap *{
+    font-family: 'jua';
+}
+
+.sleepcard-wrap{
+    font-size: 0.7em;
+    background: #ffd5fb;
+    margin: 9px 11px;
+    padding: 13px 11px;
+    border-radius: 8px;
+    color: white;
+    text-shadow: 0px 0 2px #f7a3ee8a;
+    box-shadow: 0px 2px 3px 2px #0000001f;
+}

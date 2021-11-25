@@ -1,9 +1,6 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signOut, signInWithRedirect, signInWithPopup ,onAuthStateChanged} from "firebase/auth";
-import { getFirestore,getDocs,collection,addDoc} from "firebase/firestore"
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+import { getFirestore,getDocs,collection,addDoc,deleteDoc ,doc} from "firebase/firestore"
 const firebaseConfig = {
   apiKey: "AIzaSyDbUluFwoJWUYGUysFeUy4Vr0zHYDSNFU0",
   authDomain: "good-sleep-a2c34.firebaseapp.com",
@@ -14,7 +11,7 @@ const firebaseConfig = {
   measurementId: "G-6RBM2RW3BN"
 };
 
-const app = initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 export const provider = new GoogleAuthProvider();
 export const auth = getAuth();
 export const db = getFirestore();
@@ -35,10 +32,13 @@ export const FB_DB = {
   get: async (name)=>{
     let res = [];
     const data = await getDocs(collection(db, name));
-    data.forEach(v=>res.push(v.data()))
+    data.forEach(v=>res.push({id:v.id,...v.data()}))
     return res;
   },
-  add:async (name,obj)=>{
-    const docRef = await addDoc(collection(db,name),obj);
+  add:(name,obj)=>{
+    addDoc(collection(db,name),obj);
+  },
+  delete:(name,id)=>{
+    deleteDoc(doc(db,name,id));
   }
 }

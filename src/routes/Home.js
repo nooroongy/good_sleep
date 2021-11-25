@@ -1,19 +1,48 @@
 import { connect } from "react-redux";
+import SleepCard from "../components/SleepCard";
+import { ACTION } from "../components/store";
+import { FB_DB } from "../components/_firebase";
 
-const Home = ({user,sleepData}) =>{
-    return(<div>Home...<br/>
-        {user.uid}<br/>
-        {user.displayName}<br/>
-        {user.email}<br/>
+const Home = ({ user, sleepData=[], connectSleepDB }) => {
+    function dbTest() {
+        FB_DB.add("sleep", {
+            date: '20211125',
+            sleepStart: '1203am',
+            sleepEnd: "0701am",
+            Rating: '8',
+            uid: user.uid
+        });
 
-        {sleepData.map(v=><div>{v.last}</div>)}
-    </div>)
+        FB_DB.get('sleep').then(res => {
+            connectSleepDB(res.filter(data => data.uid === user.uid))
+        })
+
+    }
+
+    function dbTest2() {
+        FB_DB.delete('sleep', sleepData[0].id)
+        
+        FB_DB.get('sleep').then(res => {
+            connectSleepDB(res.filter(data => data.uid === user.uid))
+        })
+    }
+
+    return (<>
+        <button onClick={dbTest}>add</button>
+        <button onClick={dbTest2}>delete</button><br />
+        {sleepData.map(data => <SleepCard id={data.id} key ={data.id}/>)}
+    </>)
 }
 
-function mapStatetoProps(state,props){
-    const {user,sleepData} = state;
-    console.log(sleepData)
-    return {user,sleepData}
+function mapStatetoProps(state, props) {
+    const { user, sleepData } = state;
+    return { user, sleepData }
 }
 
-export default connect(mapStatetoProps)(Home);
+function mapDispatchProps(dispatch) {
+    return {
+        connectSleepDB: (user) => dispatch(ACTION.setSleep(user)),
+    }
+}
+
+export default connect(mapStatetoProps, mapDispatchProps)(Home);

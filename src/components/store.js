@@ -1,12 +1,10 @@
 import { configureStore,createSlice} from "@reduxjs/toolkit";
-import { FB_DB } from "./_firebase";
-
 
 const slice = createSlice({
     name:'useReducer',
     initialState:{
-        user:null,
-        sleepData:{}
+        user:{},
+        sleepData:[]
     },
     reducers:{
         setUser:(state,action)=>{state.user = action.payload},
