@@ -11,7 +11,7 @@ function SleepCard({sleepData,id}){
 }
 
 function mapStateToProps(state,props){
-    const { user, sleepData } = state;
+    const { sleepData } = state;
     return {sleepData}
 }
 

@@ -3,7 +3,7 @@ import SleepCard from "../components/SleepCard";
 import { ACTION } from "../components/store";
 import { FB_DB } from "../components/_firebase";
 
-const Home = ({ user, sleepData=[], connectSleepDB }) => {
+const Home = ({ user, sleepData=[], connectSleepDB}) => {
     function dbTest() {
         FB_DB.add("sleep", {
             date: '20211125',
@@ -20,6 +20,7 @@ const Home = ({ user, sleepData=[], connectSleepDB }) => {
     }
 
     function dbTest2() {
+        if(sleepData.length === 0) return;
         FB_DB.delete('sleep', sleepData[0].id)
         
         FB_DB.get('sleep').then(res => {
@@ -35,8 +36,8 @@ const Home = ({ user, sleepData=[], connectSleepDB }) => {
 }
 
 function mapStatetoProps(state, props) {
-    const { user, sleepData } = state;
-    return { user, sleepData }
+    const { user, sleepData} = state;
+    return { user, sleepData}
 }
 
 function mapDispatchProps(dispatch) {

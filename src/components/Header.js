@@ -7,7 +7,7 @@ const Header = ({user,isLogedIn}) => {
         FB_AUTH.signOut()
     }
 
-    return (<div className='header-wrap'>
+    return (<div className='header-wrap main-color'>
         {!isLogedIn ? <></> : <button onClick={onClickSignBtn} className='header-signout'>signOut</button>}
         <span className='header-nickname'>{user ? user.displayName:''} 의 수면생활</span>
     </div>)

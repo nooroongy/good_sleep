@@ -4,11 +4,17 @@ const slice = createSlice({
     name:'useReducer',
     initialState:{
         user:{},
-        sleepData:[]
+        sleepData:[],
+        theme:{
+            mainColor:'01',
+            subColor:'01',
+            fontColor:'01',
+        }
     },
     reducers:{
         setUser:(state,action)=>{state.user = action.payload},
         setSleep:(state,action)=>{state.sleepData = action.payload},
+        settheme:(state,action)=>{state.theme = action.payload},
     }
 })
 
