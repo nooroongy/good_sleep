@@ -1,13 +1,62 @@
+.setting-wrap{
+    display: grid;
+    justify-items: center;
+}
+
 .color-sample{
-    width: 25px;
-    height: 25px;
+    width: 24px;
+    height: 24px;
     display: inline-block;
-    margin: 5px;
+    margin: 3px;
     border: #c3c3c3 1px solid;
     border-radius: 5px;
     box-shadow: 3px 2px 3px 1px #00000012;
 }
 
+
+.setting-title{
+    font-size: 1.2em;
+    text-align: center;
+    margin-top: 10px;
+    background: #00000000;
+    padding: 2px 12px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.setting-pallet-wrap{
+    background-color: #ffffff;
+    display: inline-block;
+    width: 260px;
+    padding: 13px;
+    margin-top: 4px;
+    border-radius: 10px;
+    box-shadow: 0 0 6px 3px #cdcdcd;
+}
+
+.setting-pallet-category{
+    font-size: 0.9em;
+    text-align: center;
+}
+
+.pallet-wrap{
+    display: flex;
+    justify-content: center;
+}
+
+.setting-save-btn{
+    border: none;
+    position: fixed;
+    bottom: 83px;
+    width: 76px;
+    height: 32px;
+    color: white;
+    opacity: 0.9;
+    border-radius: 6px;
+}
+
+
+/* 메인컬러 */
 .color-main-01 .main-color,.color-sample.color-main-01{
     background:linear-gradient(to right bottom,  #2193b0, #6dd5ed);
 }
@@ -18,7 +67,7 @@
     background:linear-gradient(to right bottom, #8360c3, #2ebf91)
 }
 .color-main-04 .main-color,.color-sample.color-main-04{
-    background:linear-gradient(to right bottom, #ed213a, #93291e)
+    background:linear-gradient(to right bottom, #8e2de2, #4a00e0)
 }
 .color-main-05 .main-color,.color-sample.color-main-05{
     background:linear-gradient(to right bottom, #0f2027, #203a43, #2c5364)
@@ -31,4 +80,58 @@
 }
 .color-main-08 .main-color,.color-sample.color-main-08{
     background:linear-gradient(to right bottom, #12c2e9, #c471ed, #f64f59)
+}
+
+
+/* 서브 컬러 */
+.color-sub-01 .sub-color,.color-sample.color-sub-01{
+    background:#3fadc8
+}
+.color-sub-02 .sub-color,.color-sample.color-sub-02{
+    background:#f5b8c0
+}
+.color-sub-03 .sub-color,.color-sample.color-sub-03{
+    background:#a2bfcf
+}
+.color-sub-04 .sub-color,.color-sample.color-sub-04{
+    background:#bf88ef
+}
+.color-sub-05 .sub-color,.color-sample.color-sub-05{
+    background:#77868c
+}
+.color-sub-06 .sub-color,.color-sample.color-sub-06{
+    background:#d77eaf
+}
+.color-sub-07 .sub-color,.color-sample.color-sub-07{
+    background:#a8cbbc
+}
+.color-sub-08 .sub-color,.color-sample.color-sub-08{
+    background:#dab1f5
+}
+
+
+/* 폰트 컬러 */
+.color-font-01 .font-color{
+    color:#000000;
+}
+.color-font-02 .font-color{
+    color:#ffffff
+}
+.color-font-03 .font-color{
+    color:#38a7c3
+}
+.color-font-04 .font-color{
+    color:#f0a4ae
+}
+.color-sample.color-font-01{
+    background:#000000
+}
+.color-sample.color-font-02{
+    background:#ffffff
+}
+.color-sample.color-font-03{
+    background:#38a7c3
+}
+.color-sample.color-font-04{
+    background:#f0a4ae
 }

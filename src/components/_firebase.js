@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signOut, signInWithRedirect, signInWithPopup ,onAuthStateChanged} from "firebase/auth";
-import { getFirestore,getDocs,collection,addDoc,deleteDoc ,doc} from "firebase/firestore"
+import { getFirestore,getDocs,collection,addDoc,deleteDoc ,doc,updateDoc} from "firebase/firestore"
 const firebaseConfig = {
   apiKey: "AIzaSyDbUluFwoJWUYGUysFeUy4Vr0zHYDSNFU0",
   authDomain: "good-sleep-a2c34.firebaseapp.com",
@@ -40,5 +40,10 @@ export const FB_DB = {
   },
   delete:(name,id)=>{
     deleteDoc(doc(db,name,id));
+  },
+  update:(name,id,data)=>{
+    updateDoc(doc(db, name, id),data).then(()=>{
+      alert('수정이 완료되었습니다.')
+    });
   }
 }

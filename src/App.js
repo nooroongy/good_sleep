@@ -27,6 +27,8 @@ function App({ setUser, connectSleepDB, connectThemeDB ,theme}) {
 
   themeRest();
   document.getElementById('root').classList.add(`color-main-${theme.mainColor}`)
+  document.getElementById('root').classList.add(`color-sub-${theme.subColor}`)
+  document.getElementById('root').classList.add(`color-font-${theme.fontColor}`)
 
   //app 시작시 초기 세팅
   useEffect(() => {
@@ -38,13 +40,13 @@ function App({ setUser, connectSleepDB, connectThemeDB ,theme}) {
         const { displayName, uid, email } = user;
         setUser({ displayName, uid, email })
 
-        //앱 시작했을때 sleep data DB에 연결
+        //sleep data DB에 연결
         FB_DB.get('sleep').then(res => {
           connectSleepDB(res.filter(data => data.uid === user.uid))
           setIsLoading(false);
         })
 
-        //앱 시작했을때 theme data DB에 연결
+        //theme data DB에 연결
         FB_DB.get('theme').then(res => {
           const themeData = res.filter(data => data.uid === user.uid);
           if (themeData.length === 0) {
