@@ -8,7 +8,7 @@ const Header = ({user,isLogedIn}) => {
     }
 
     return (<div className='header-wrap main-color'>
-        {!isLogedIn ? <></> : <button onClick={onClickSignBtn} className='header-signout'>signOut</button>}
+        {!isLogedIn ? <></> : <button onClick={onClickSignBtn} className='header-signout font-icon'>logout</button>}
         <span className='header-nickname'>{user ? user.displayName:''} 의 수면생활</span>
     </div>)
 }
