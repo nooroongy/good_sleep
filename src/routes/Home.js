@@ -19,19 +19,8 @@ const Home = ({ user, sleepData=[], connectSleepDB}) => {
 
     }
 
-    function dbTest2() {
-        if(sleepData.length === 0) return;
-        FB_DB.delete('sleep', sleepData[0].id)
-        
-        FB_DB.get('sleep').then(res => {
-            connectSleepDB(res.filter(data => data.uid === user.uid))
-        })
-    }
-
     return (<>
         <button onClick={dbTest}>add</button>
-        <button onClick={dbTest2}>delete</button><br />
-        {sleepData.map(data => <SleepCard id={data.id} key ={data.id}/>)}
     </>)
 }
 

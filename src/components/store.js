@@ -1,22 +1,29 @@
-import { configureStore,createSlice} from "@reduxjs/toolkit";
+import { configureStore, createSlice } from "@reduxjs/toolkit";
 
 const slice = createSlice({
-    name:'useReducer',
-    initialState:{
-        user:{},
-        sleepData:[],
-        theme:{
-            mainColor:'01',
-            subColor:'01',
-            fontColor:'01',
+    name: 'useReducer',
+    initialState: {
+        user: {},
+        sleepData: [],
+        colorSet: {
+            mainColor: '01',
+            subColor: '01',
+            theme: '01',
+            fontColor: '01',
         }
     },
-    reducers:{
-        setUser:(state,action)=>{state.user = action.payload},
-        setSleep:(state,action)=>{state.sleepData = action.payload},
-        settheme:(state,action)=>{state.theme = action.payload},
+    reducers: {
+        setUser: (state, action) => { state.user = action.payload },
+        setSleep: (state, action) => { state.sleepData = action.payload },
+        setColorSet: (state, action) => { state.colorSet = action.payload },
+        removeSleep: (state, action) => {
+            state.sleepData = state.sleepData.filter(data => data.id !== action.payload)
+        },
+        addSleep:(state, action)=>{
+            state.sleepData.push(action.payload)
+        }
     }
 })
 
 export const ACTION = slice.actions;
-export default configureStore({reducer:slice.reducer})
+export default configureStore({ reducer: slice.reducer })

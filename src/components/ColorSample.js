@@ -1,26 +1,27 @@
 import { connect } from "react-redux";
 import { ACTION } from "./store";
 
-const ColorSample = ({no,category,theme,setTheme}) =>{
+const ColorSample = ({no,category,colorSet,setColorSet}) =>{
     function onClick(){
-        setTheme(theme)
+        console.log(colorSet)
+        setColorSet(colorSet)
     }
 
     return <span onClick={onClick} className={`color-sample color-${category}-${no}`}></span>
 }
 
 function mapStatetoProps(state,props){
-    let theme = {...state.theme};
+    let colorSet = {...state.colorSet};
     const {category,no} = props;
-    theme[category+'Color'] = no;
+    colorSet[category+'Color'] = no;
     return {
-        theme
+        colorSet
     }
 }
 
 function mapDispatchProps(dispatch) {
     return {
-        setTheme: (theme) => dispatch(ACTION.settheme(theme)),
+        setColorSet: (theme) => dispatch(ACTION.setColorSet(theme)),
     }
 }
 

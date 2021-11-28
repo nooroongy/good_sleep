@@ -8,27 +8,30 @@ import Auth from './routes/Auth';
 import { connect } from 'react-redux';
 import { ACTION } from './components/store';
 import './css/common.css'
+import './css/color.css'
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Record from './routes/Record'
 import Setting from './routes/Setting';
 
-function themeRest(){
-  ['01','02','03','04','05','06','07','08'].forEach(no=>{
-    document.getElementById('root').classList.remove('color-main-'+no)
-    document.getElementById('root').classList.remove('color-sub-'+no)
-    document.getElementById('root').classList.remove('color-font-'+no)
+function colorSetRest() {
+  ['01', '02', '03', '04', '05', '06', '07', '08'].forEach(no => {
+    document.getElementById('root').classList.remove('color-main-' + no)
+    document.getElementById('root').classList.remove('color-sub-' + no)
+    document.getElementById('root').classList.remove('color-font-' + no)
+    document.getElementById('root').classList.remove('color-theme-' + no)
   })
 }
 
-function App({ setUser, connectSleepDB, connectThemeDB ,theme}) {
+function App({ setUser, connectSleepDB, connectThemeDB, colorSet }) {
   const [isLogedIn, setIsLogedIn] = useState(false); // 로그인중인지
   const [isLoading, setIsLoading] = useState(true); // 로딩중인지
 
-  themeRest();
-  document.getElementById('root').classList.add(`color-main-${theme.mainColor}`)
-  document.getElementById('root').classList.add(`color-sub-${theme.subColor}`)
-  document.getElementById('root').classList.add(`color-font-${theme.fontColor}`)
+  colorSetRest();
+  document.getElementById('root').classList.add(`color-main-${colorSet.mainColor}`)
+  document.getElementById('root').classList.add(`color-sub-${colorSet.subColor}`)
+  document.getElementById('root').classList.add(`color-font-${colorSet.fontColor}`)
+  document.getElementById('root').classList.add(`color-theme-${colorSet.themeColor}`)
 
   //app 시작시 초기 세팅
   useEffect(() => {
@@ -47,13 +50,14 @@ function App({ setUser, connectSleepDB, connectThemeDB ,theme}) {
         })
 
         //theme data DB에 연결
-        FB_DB.get('theme').then(res => {
+        FB_DB.get('colorSet').then(res => {
           const themeData = res.filter(data => data.uid === user.uid);
           if (themeData.length === 0) {
-            FB_DB.add("theme", {
+            FB_DB.add("colorSet", {
               mainColor: '01',
               subColor: '01',
               fontColor: '01',
+              themeColor: '01',
               uid: user.uid
             });
           } else {
@@ -71,13 +75,13 @@ function App({ setUser, connectSleepDB, connectThemeDB ,theme}) {
       <Loading /> :
       isLogedIn ?
         <BrowserRouter>
-          <Header isLogedIn={isLogedIn}/>
+          <Header isLogedIn={isLogedIn} />
           <Routes>
             <Route path='/*' element={<Home />}></Route>
             <Route path='/record' element={<Record />}></Route>
             <Route path='/setting' element={<Setting />}></Route>
           </Routes>
-          <Footer/>
+          <Footer />
         </BrowserRouter>
         :
         <Auth />
@@ -88,13 +92,13 @@ function mapDispatchProps(dispatch) {
   return {
     setUser: (user) => dispatch(ACTION.setUser(user)),
     connectSleepDB: (user) => dispatch(ACTION.setSleep(user)),
-    connectThemeDB: (user) => dispatch(ACTION.settheme(user)),
+    connectThemeDB: (user) => dispatch(ACTION.setColorSet(user)),
   }
 }
 
-function mapStateToProps(state){
-    const {theme} = state;
-    return{theme}
+function mapStateToProps(state) {
+  const { colorSet } = state;
+  return { colorSet }
 }
 
 export default connect(mapStateToProps, mapDispatchProps)(App);

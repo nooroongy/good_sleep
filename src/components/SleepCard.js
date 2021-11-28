@@ -1,18 +1,86 @@
+import { useState } from "react";
 import { connect } from "react-redux";
 import '../css/sleepcard.css'
+import { ACTION } from "./store";
+import { FB_DB } from "./_firebase";
 
-function SleepCard({sleepData,id}){
-    const sleepObj = sleepData.filter(data=>data.id === id)[0]
-    return <div className='sleepcard-wrap'>
-        <span>잠든시간:{sleepObj.sleepStart}</span>
-        <span>일어난시간:{sleepObj.sleepEnd}</span>
-        
+function SleepCard({ sleepData, id, removeSleep, addSleep,user }) {
+    const sleepObj = sleepData.filter(data => data.id === id)[0]
+    const date = `${sleepObj.date.substr(0, 4)}/${sleepObj.date.substr(4, 2)}/${sleepObj.date.substr(6, 2)}`
+    const [isDeleted, setIsDeleted] = useState(false);
+
+    function deleteBtnClick() {
+        if (window.confirm('정말 삭제하시겠습니까?')) {
+            console.log(sleepObj.id)
+            FB_DB.delete('sleep', sleepObj.id)
+            setIsDeleted(true)
+            setTimeout(() => {
+                removeSleep(sleepObj.id);
+            }, 1000);
+        }
+    }
+
+    function addBtnClick() {
+        FB_DB.add("sleep", {
+            date: '20211125',
+            sleepStart: '1203am',
+            sleepEnd: "0701am",
+            Rating: '8',
+            uid: user.uid
+        },(id)=>{
+            addSleep({
+                date: '20211125',
+                sleepStart: '1203am',
+                sleepEnd: "0701am",
+                Rating: '8',
+                uid: user.uid,
+                id:id
+            })
+        });
+    }
+
+    return <div className={'sleepcard-wrap font-color ' + (isDeleted ? 'deleted' : '')}>
+        {id !== 'new' ? <div className='sleepcard-old-wrap'>
+            <div className='sleepcard-header sub-color'>
+                <span className='sleepcard-data'>{date}</span>
+            </div>
+            <div className='sleepcard-body theme-color'>
+                <span>{sleepObj.id}</span>
+                <span className='sleepcard-trash-icon' onClick={deleteBtnClick}>delete_forever</span>
+            </div>
+        </div>
+            : <>
+                <div className='sleepcard-new-wrap sub-color'>
+                    <span className='sleepcard-plus-btn' onClick={addBtnClick}>add</span>
+                </div>
+            </>
+        }
+
     </div>
 }
 
-function mapStateToProps(state,props){
-    const { sleepData } = state;
-    return {sleepData}
+function mapStateToProps(state, props) {
+    const { sleepData,user } = state;
+    return {
+        sleepData: [
+            ...sleepData,
+            {
+                Rating: "",
+                date: "",
+                id: "new",
+                sleepEnd: "",
+                sleepStart: "",
+                uid: "",
+            }
+        ],
+        user
+    }
 }
 
-export default connect(mapStateToProps)(SleepCard);
+function mapDispatchProps(dispatch) {
+    return {
+        removeSleep: (id) => dispatch(ACTION.removeSleep(id)),
+        addSleep: (id) => dispatch(ACTION.addSleep(id)),
+    }
+}
+export default connect(mapStateToProps, mapDispatchProps)(SleepCard);

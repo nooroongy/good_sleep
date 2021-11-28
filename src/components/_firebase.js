@@ -35,8 +35,10 @@ export const FB_DB = {
     data.forEach(v=>res.push({id:v.id,...v.data()}))
     return res;
   },
-  add:(name,obj)=>{
-    addDoc(collection(db,name),obj);
+  add:(name,obj,callback)=>{
+    addDoc(collection(db,name),obj).then((res)=>{
+      callback(res.id);
+    });
   },
   delete:(name,id)=>{
     deleteDoc(doc(db,name,id));

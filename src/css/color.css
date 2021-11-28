@@ -1,0 +1,93 @@
+
+/* 메인컬러 */
+.color-main-01 .main-color,.color-sample.color-main-01{
+    background:linear-gradient(to right bottom,  #2193b0, #6dd5ed);
+}
+.color-main-02 .main-color,.color-sample.color-main-02{
+    background:linear-gradient(to right bottom, #ee9ca7, #ffdde1)
+}
+.color-main-03 .main-color,.color-sample.color-main-03{
+    background:linear-gradient(to right bottom, #8360c3, #2ebf91)
+}
+.color-main-04 .main-color,.color-sample.color-main-04{
+    background:linear-gradient(to right bottom, #8e2de2, #4a00e0)
+}
+.color-main-05 .main-color,.color-sample.color-main-05{
+    background:linear-gradient(to right bottom, #0f2027, #203a43, #2c5364)
+}
+.color-main-06 .main-color,.color-sample.color-main-06{
+    background:linear-gradient(to right bottom, #f953c6, #b91d73);
+}
+.color-main-07 .main-color,.color-sample.color-main-07{
+    background:linear-gradient(to right bottom, #1f4037, #99f2c8)
+}
+.color-main-08 .main-color,.color-sample.color-main-08{
+    background:linear-gradient(to right bottom, #12c2e9, #c471ed, #f64f59)
+}
+
+
+/* 서브 컬러 */
+.color-sub-01 .sub-color,.color-sample.color-sub-01{
+    background:#3fadc8
+}
+.color-sub-02 .sub-color,.color-sample.color-sub-02{
+    background:#f5b8c0
+}
+.color-sub-03 .sub-color,.color-sample.color-sub-03{
+    background:#a2bfcf
+}
+.color-sub-04 .sub-color,.color-sample.color-sub-04{
+    background:#bf88ef
+}
+.color-sub-05 .sub-color,.color-sample.color-sub-05{
+    background:#77868c
+}
+.color-sub-06 .sub-color,.color-sample.color-sub-06{
+    background:#d77eaf
+}
+.color-sub-07 .sub-color,.color-sample.color-sub-07{
+    background:#a8cbbc
+}
+.color-sub-08 .sub-color,.color-sample.color-sub-08{
+    background:#dab1f5
+}
+
+/* 서브 컬러 */
+.color-theme-01 .theme-color,.color-sample.color-theme-01{
+    background:#ffffff
+}
+.color-theme-02 .theme-color,.color-sample.color-theme-02{
+    background:#cdcdcd;
+}
+.color-theme-03 .theme-color,.color-sample.color-theme-03{
+    background:#fdeeef
+}
+.color-theme-04 .theme-color,.color-sample.color-theme-04{
+    background:#cee3e8
+}
+
+/* 폰트 컬러 */
+.color-font-01 .font-color{
+    color:#000000;
+}
+.color-font-02 .font-color{
+    color:#ffffff
+}
+.color-font-03 .font-color{
+    color:#116b81
+}
+.color-font-04 .font-color{
+    color:#af5d67
+}
+.color-sample.color-font-01{
+    background:#000000
+}
+.color-sample.color-font-02{
+    background:#ffffff
+}
+.color-sample.color-font-03{
+    background:#116b81
+}
+.color-sample.color-font-04{
+    background:#af5d67
+}
