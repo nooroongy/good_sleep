@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import Pallet from '../components/Pallet'
 import { FB_DB } from '../components/_firebase'
 import '../css/setting.css'
+import Card from '../components/Card'
 
 const Setting = ({ updateColorSet, colorSet }) => {
     const saveSetting = () => {
@@ -22,9 +23,7 @@ const Setting = ({ updateColorSet, colorSet }) => {
     }
 
     return <div className='setting-wrap'>
-        {/* <div className='setting-title'>Color</div> */}
-        <div className='setting-pallet-wrap theme-color'>
-            <div className='setting-pallet-wrap-header sub-color font-color'>Color</div>
+        <Card title={'Color'}>
             <div className='setting-pallet-category'>main</div>
             <Pallet category={'main'} noSet={noSet.main}></Pallet>
             <div className='setting-pallet-category'>sub</div>
@@ -33,7 +32,7 @@ const Setting = ({ updateColorSet, colorSet }) => {
             <Pallet category={'theme'} noSet={noSet.theme}></Pallet>
             <div className='setting-pallet-category'>font</div>
             <Pallet category={'font'} noSet={noSet.font}></Pallet>
-        </div>
+        </Card>
         <button onClick={saveSetting} className='setting-save-btn main-color font-color'>save</button>
     </div>
 }

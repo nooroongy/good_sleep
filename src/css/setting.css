@@ -24,29 +24,6 @@
     margin-bottom: 5px;
 }
 
-.setting-pallet-wrap{
-    display: inline-block;
-    width: 260px;
-    padding: 13px;
-    margin-top: 15px;
-    border-radius: 10px;
-    box-shadow: 0 0 6px 3px #cdcdcd;
-    position: relative;
-    padding-top: 40px;
-    text-align: center;
-}
-
-.setting-pallet-wrap-header{
-    height: 30px;
-    padding-top: 8px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    border-radius: 10px 10px 0 0;
-    font-weight: 500;
-    font-size: 1.1em;
-}
 
 .setting-pallet-category{
     font-size: 0.9em;
@@ -69,5 +46,6 @@
     border-radius: 6px;
     font-size: 1.1em;
     font-weight: 500;
+    left: calc(50% - 38px);
 }
 

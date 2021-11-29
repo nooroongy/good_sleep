@@ -1,0 +1,63 @@
+.home-wrap{
+    display: grid;
+    justify-items:center;
+    padding-bottom: 80px;
+}
+
+.home-wrap>*{
+    margin-bottom: 10px;
+}
+
+.home-tips{
+    font-family: 'Noto Sans KR';
+    font-size: 0.95em;
+    font-weight: 300;
+    padding: 10px;
+}
+
+.home-add-btn{
+    width: 50px;
+    height: 50px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 11px;
+    font-size: 2.1em;
+    background: #00000029;
+    color: white;
+}
+
+.home-for-you-wrap{
+    display: grid;
+    grid-template-columns: 2fr 7fr;
+    grid-template-rows: 1fr 1fr 1.5fr;
+    padding-top: 7px;
+}
+
+.home-for-you-hour-wrap{
+    grid-row: 1/4;
+}
+.home-for-you-data{
+    font-family: 'Noto Sans KR';
+    font-size: 0.7em;
+    text-align: left;
+    padding-left: 11px;
+    font-style: italic;
+}
+.home-for-you-base{
+    font-family: 'Noto Sans KR';
+    font-size: 0.6em;
+    position: absolute;
+    bottom: 6px;
+    right: 9px;
+    font-style: italic;
+    color: black;
+    font-weight: 100;
+}
+
+.home-for-you-hour{
+    font-size: 3.2em;
+}
+.home-for-you-hour-h{
+    font-size: 1.2em;
+    margin-left: 2px;
+}
