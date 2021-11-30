@@ -1,6 +1,7 @@
 .setting-wrap{
     display: grid;
     justify-items: center;
+    padding-top: 60px;
 }
 
 .color-sample{

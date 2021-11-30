@@ -1,10 +1,9 @@
 .card-wrap{
     display: inline-block;
-    width: 260px;
-    padding: 13px;
+    padding: 40px 6px 10px 6px;
     margin-top: 15px;
     border-radius: 10px;
-    box-shadow: 0 0 6px 3px #cdcdcd;
+    box-shadow: 0 0 6px 3px #00000045;
     position: relative;
     padding-top: 40px;
     text-align: center;

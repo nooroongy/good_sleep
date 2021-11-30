@@ -1,5 +1,6 @@
 .record-wrap{
-    height: calc(100vh - 143px);
-    padding: 10px;
-    overflow: auto;
+    display: grid;
+    justify-items: center;
+    padding-bottom: 75px;
+    padding-top: 60px;
 }

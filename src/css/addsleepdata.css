@@ -1,0 +1,65 @@
+.add-data-wrap{
+    width: 250px;
+}
+.add-data-contents{
+    height: 140px;
+    overflow: hidden;
+    display: flex;
+    width: 1500px;
+    transition: 1s;
+}
+
+.add-data-contents>*{
+    width: 250px;
+}
+
+.add-data-step1{
+    height: 100%;
+    padding-top: 25px;
+}
+
+.add-data-step1-text{
+    font-family: 'Jua' !important;
+}
+.add-data-step1-scores{
+    margin-top: 15px;
+}
+.add-data-step1-score{
+    font-size: 2.2em;
+    transition: 0.4s;
+    display: inline-block;
+    margin: 0 3px;
+}
+
+.add-data-step1-selected{
+    color: #3fadc8;
+    transform: translateY(-7px);
+}
+
+.add-data-step2{
+    height: 100%;
+    background-color: blueviolet;
+}
+.add-data-step3{
+    height: 100%;
+    background-color: black;
+}
+.add-data-step4{
+    height: 100%;
+    background-color: green;
+}
+.add-data-step5{
+    height: 100%;
+    background-color: aqua;
+}
+.add-data-btn-wrap{
+
+}
+.add-data-btn{
+    width: 71px;
+    margin: 4px 8px;
+    border: none;
+    height: 33px;
+    border-radius: 5px;
+    font-weight: 700;
+}

@@ -1,11 +1,12 @@
 .home-wrap{
     display: grid;
     justify-items:center;
-    padding-bottom: 80px;
+    padding-top: 60px;
 }
 
 .home-wrap>*{
     margin-bottom: 10px;
+    width: 85%;
 }
 
 .home-tips{
@@ -28,13 +29,18 @@
 
 .home-for-you-wrap{
     display: grid;
-    grid-template-columns: 2fr 7fr;
+    grid-template-columns: 2.3fr 7fr;
     grid-template-rows: 1fr 1fr 1.5fr;
     padding-top: 7px;
+    justify-content: center;
 }
 
 .home-for-you-hour-wrap{
     grid-row: 1/4;
+}
+
+.home-for-you-hour-wrap>*{
+    display: inline-block;
 }
 .home-for-you-data{
     font-family: 'Noto Sans KR';
@@ -55,9 +61,25 @@
 }
 
 .home-for-you-hour{
-    font-size: 3.2em;
+    font-size: 2.7em;
+    margin: -11px 0px -6px 8px;
+    font-weight: 700;
+    width: 23px;
 }
-.home-for-you-hour-h{
-    font-size: 1.2em;
+
+.home-for-you-hour2{
+    font-weight: 600;
+    font-size: 1.3em;
+}
+.home-for-you-hour-tx{
+    font-size: 1.1em;
     margin-left: 2px;
+}
+
+.home-for-you-hour-text{
+    font-size: 0.6em;
+    display: inline-block;
+    position: absolute;
+    left: 15px;
+    bottom: 8px;
 }

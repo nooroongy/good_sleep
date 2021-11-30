@@ -1,15 +1,16 @@
-.sleepcard-wrap *{
+.sleepcard-wrap *:not(.font-icon,.sleepcard-plus-btn){
     font-family: 'jua';
 }
 
 .sleepcard-wrap{
     font-size: 0.7em;
-    margin: 13px 9px;
-    text-shadow: 0px 0 2px #f7a3ee8a;
+    margin: 5px 0px;
     box-shadow: 0px 2px 3px 2px #0000001f;
     height: 50px;
     border-radius: 8px;
-    transition: 1s;
+    transition: 0.7s;
+    width: 85%;
+    padding: 3px;
 }
 
 .sleepcard-new-wrap{
@@ -33,12 +34,12 @@
     display: grid;
     height: 100%;
     border-radius: 8px;
-    grid-template-columns: 3fr 7fr;
+    grid-template-columns: 3fr 8.5fr;
 }
 
 .sleepcard-header{
     border-radius: 8px 0 0 8px;
-    font-size: 1.2em;
+    font-size: 1.15em;
     display: grid;
     align-items: center;
     justify-items: center;
@@ -47,14 +48,14 @@
 .sleepcard-body {
     border-radius: 0 8px 8px 0;
     display: grid;
-    grid-template-columns: 4fr 1fr;
+    grid-template-columns: 7fr 1fr 1.2fr;
     align-items: center;
     justify-items: center;
 }
 
-.sleepcard-trash-icon{
-    font-family: 'Material Icons';
-    font-size: 2.7em;
+.sleepcard-icon{
+    font-size: 2.1em;
+    text-shadow: 0 0 5px #0000001a;
 }
 
 .sleepcard-wrap.deleted{
