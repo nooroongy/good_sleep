@@ -6,7 +6,7 @@
     overflow: hidden;
     display: flex;
     width: 1500px;
-    transition: 1s;
+    transition: 0.7s;
 }
 
 .add-data-contents>*{
@@ -18,7 +18,7 @@
     padding-top: 25px;
 }
 
-.add-data-step1-text{
+.add-data-step-text{
     font-family: 'Jua' !important;
 }
 .add-data-step1-scores{
@@ -32,25 +32,39 @@
 }
 
 .add-data-step1-selected{
-    color: #3fadc8;
     transform: translateY(-7px);
+    color: transparent;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
 }
 
-.add-data-step2{
+.add-data-step2,.add-data-step3{
     height: 100%;
-    background-color: blueviolet;
+    padding-top: 25px;
 }
-.add-data-step3{
-    height: 100%;
-    background-color: black;
+
+.add-data-step2-time,.add-data-step3-time{
+    margin-top: 5px;
+    font-size: 1.8em;
 }
+
+.add-data-step2-h,.add-data-step2-m,.add-data-step3-h,.add-data-step3-m{
+    color: transparent;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+}
+
+.add-data-step2-tx,.add-data-step3-tx{
+    font-size: 0.7em;
+    font-family: 'Jua' !important;
+    margin-right: 10px;
+    margin-left: 2px;
+}
+
 .add-data-step4{
+    padding-top: 45px;
     height: 100%;
-    background-color: green;
-}
-.add-data-step5{
-    height: 100%;
-    background-color: aqua;
+    font-size: 1.1em;
 }
 .add-data-btn-wrap{
 
