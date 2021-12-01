@@ -59,7 +59,7 @@ const AddSleepData = ({ addSleep, user, callbaclFn }) => {
             <div className='add-data-step1'>
                 <div className='add-data-step-text'>잘 주무셨나요? <br />일어났을 때 기분을 선택해주세요</div>
                 <div className='add-data-step1-scores'>
-                    <span className='add-data-step1-score font-icon' onClick={onClickRating}>sick</span>
+                    <span className='add-data-step1-score font-icon' onClick={onClickRating} rating='1'>sick</span>
                     <span className='add-data-step1-score font-icon' onClick={onClickRating} rating='2'>mood_bad</span>
                     <span className='add-data-step1-score font-icon add-data-step1-selected main-color' onClick={onClickRating} rating='3'>sentiment_satisfied</span>
                     <span className='add-data-step1-score font-icon' onClick={onClickRating} rating='4'>mood</span>
