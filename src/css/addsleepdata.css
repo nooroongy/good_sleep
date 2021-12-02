@@ -6,7 +6,7 @@
     overflow: hidden;
     display: flex;
     width: 1500px;
-    transition: 0.7s;
+    transition: 0.5s;
 }
 
 .add-data-contents>*{
@@ -19,7 +19,8 @@
 }
 
 .add-data-step-text{
-    font-family: 'Jua' !important;
+    font-family: 'Noto Sans KR';
+    font-weight: 600;
 }
 .add-data-step1-scores{
     margin-top: 15px;
@@ -29,6 +30,7 @@
     transition: 0.4s;
     display: inline-block;
     margin: 0 3px;
+    color: #c5c5c5;
 }
 
 .add-data-step1-selected{
@@ -40,18 +42,26 @@
 
 .add-data-step2,.add-data-step3{
     height: 100%;
-    padding-top: 25px;
+    padding-top: 15px;
 }
 
 .add-data-step2-time,.add-data-step3-time{
-    margin-top: 5px;
+    margin-top: 15px;
     font-size: 1.8em;
 }
 
-.add-data-step2-h,.add-data-step2-m,.add-data-step3-h,.add-data-step3-m{
+.add-data-step2-h,.add-data-step2-m,.add-data-step3-h,.add-data-step3-m,.add-data-step-text,.add-data-step2-tx,.add-data-step3-tx,.add-data-step4-date>*{
     color: transparent;
     -webkit-background-clip: text !important;
     background-clip: text !important;
+}
+
+.add-data-step2-h,.add-data-step2-m,.add-data-step3-h,.add-data-step3-m{
+    border: none;
+    width: 39px;
+    font-size: 1em;
+    text-align: right;
+    height: 32px;
 }
 
 .add-data-step2-tx,.add-data-step3-tx{
@@ -62,6 +72,33 @@
 }
 
 .add-data-step4{
+    margin-top: 15px;
+}
+
+.add-data-step4-date{
+    margin-top: 20px;
+}
+
+.add-data-step4-date>*{
+    font-size: 1.5em;
+    font-weight: 500;
+}
+
+.add-data-step4-year{
+    border: none;
+    width: 170px;
+    text-align: center;
+}
+.add-data-step4-M{
+    border: none;
+    width: 25px;
+}
+.add-data-step4-d{
+    border: none;
+    width: 39px;
+}
+
+.add-data-step5{
     padding-top: 45px;
     height: 100%;
     font-size: 1.1em;

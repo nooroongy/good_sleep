@@ -22,33 +22,17 @@ function SleepCard({ sleepData, id, removeSleep, addSleep,user,addBtnClick }) {
 
     function onAddBtnClick() {
         addBtnClick()
-        // FB_DB.add("sleep", {
-        //     date: '20211125',
-        //     sleepStart: '1203am',
-        //     sleepEnd: "0701am",
-        //     Rating: '8',
-        //     uid: user.uid
-        // },(id)=>{
-        //     addSleep({
-        //         date: '20211125',
-        //         sleepStart: '1203am',
-        //         sleepEnd: "0701am",
-        //         Rating: '8',
-        //         uid: user.uid,
-        //         id:id
-        //     })
-        // });
     }
 
     return <div className={'sub-color sleepcard-wrap font-color ' + (isDeleted ? 'deleted' : '')}>
         {id !== 'new' ? <div className='sleepcard-old-wrap'>
             <div className='sleepcard-header sub-color'>
-                <span className='sleepcard-data'>{date}</span>
+                <span className='sleepcard-date'>{date}</span>
             </div>
             <div className='sleepcard-body theme-color'>
-                <span>{sleepObj.id}</span>
-                <span className='sleepcard-icon font-icon' onClick={deleteBtnClick}>edit</span>
-                <span className='sleepcard-icon font-icon' onClick={deleteBtnClick}>delete_forever</span>
+                <span className='sleepcard-data main-color'>{sleepObj.id}</span>
+                <span className='sleepcard-icon font-icon main-color' onClick={deleteBtnClick}>edit</span>
+                <span className='sleepcard-icon font-icon main-color' onClick={deleteBtnClick}>delete_forever</span>
             </div>
         </div>
             : <>

@@ -53,6 +53,12 @@
     justify-items: center;
 }
 
+.sleepcard-data,.sleepcard-icon{
+    color: transparent;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+}
+
 .sleepcard-icon{
     font-size: 2.1em;
     text-shadow: 0 0 5px #0000001a;

@@ -17,3 +17,7 @@ body{
 .font-icon{
     font-family: 'Material Icons';
 }
+
+*:focus{
+    outline: none;
+}

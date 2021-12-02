@@ -1,32 +1,47 @@
 
 /* 메인컬러 */
+.color-main-00 .main-color,.color-sample.color-main-00{
+    background:linear-gradient(to right bottom,  #7f7fd5cc, #86a8e7, #91eae4ad);
+    caret-color: #86a8e7;
+}
 .color-main-01 .main-color,.color-sample.color-main-01{
     background:linear-gradient(to right bottom,  #2193b0, #6dd5ed);
+    caret-color: #2193b0;
 }
 .color-main-02 .main-color,.color-sample.color-main-02{
-    background:linear-gradient(to right bottom, #ee9ca7, #ffdde1)
+    background:linear-gradient(to right bottom, #ee9ca7, #ffdde1);
+    caret-color: #ee9ca7;
 }
 .color-main-03 .main-color,.color-sample.color-main-03{
-    background:linear-gradient(to right bottom, #8360c3, #2ebf91)
+    background:linear-gradient(to right bottom, #8360c3, #2ebf91);
+    caret-color: #8360c3;
 }
 .color-main-04 .main-color,.color-sample.color-main-04{
-    background:linear-gradient(to right bottom, #8e2de2, #4a00e0)
+    background:linear-gradient(to right bottom, #9362bdc9, #733ce1);
+    caret-color: #8e2de2;
 }
 .color-main-05 .main-color,.color-sample.color-main-05{
-    background:linear-gradient(to right bottom, #0f2027, #203a43, #2c5364)
+    background:linear-gradient(to right bottom, #0f2027, #203a43, #2c5364);
+    caret-color: #203a43;
 }
 .color-main-06 .main-color,.color-sample.color-main-06{
     background:linear-gradient(to right bottom, #f953c6, #b91d73);
+    caret-color: #f953c6;
 }
 .color-main-07 .main-color,.color-sample.color-main-07{
-    background:linear-gradient(to right bottom, #1f4037, #99f2c8)
+    background:linear-gradient(to right bottom, #2d5c4fbd, #a7ffd6d4);
+    caret-color: #1f4037;
 }
 .color-main-08 .main-color,.color-sample.color-main-08{
-    background:linear-gradient(to right bottom, #12c2e9, #c471ed, #f64f59)
+    background:linear-gradient(to right bottom, #12c2e9a8, #c471ed, #f64f59c2);
+    caret-color: #c471ed;
 }
 
 
 /* 서브 컬러 */
+.color-sub-00 .sub-color,.color-sample.color-sub-00{
+    background:#88b5e6
+}
 .color-sub-01 .sub-color,.color-sample.color-sub-01{
     background:#3fadc8
 }
@@ -68,26 +83,26 @@
 
 /* 폰트 컬러 */
 .color-font-01 .font-color{
-    color:#000000;
+    color:#ffffff;
 }
 .color-font-02 .font-color{
-    color:#ffffff
+    color:#000000;
 }
 .color-font-03 .font-color{
-    color:#116b81
+    color:#116b81;
 }
 .color-font-04 .font-color{
-    color:#af5d67
+    color:#af5d67;
 }
 .color-sample.color-font-01{
-    background:#000000
+    background:#ffffff;
 }
 .color-sample.color-font-02{
-    background:#ffffff
+    background:#000000;
 }
 .color-sample.color-font-03{
-    background:#116b81
+    background:#116b81;
 }
 .color-sample.color-font-04{
-    background:#af5d67
+    background:#af5d67;
 }
