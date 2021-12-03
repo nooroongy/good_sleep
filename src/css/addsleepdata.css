@@ -58,10 +58,11 @@
 
 .add-data-step2-h,.add-data-step2-m,.add-data-step3-h,.add-data-step3-m{
     border: none;
-    width: 39px;
+    width: 35px;
     font-size: 1em;
     text-align: right;
     height: 32px;
+    letter-spacing: -3px;
 }
 
 .add-data-step2-tx,.add-data-step3-tx{
@@ -86,8 +87,9 @@
 
 .add-data-step4-year{
     border: none;
-    width: 170px;
+    width: 175px;
     text-align: center;
+    letter-spacing: -1.5px;
 }
 .add-data-step4-M{
     border: none;

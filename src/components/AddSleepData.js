@@ -17,40 +17,64 @@ const useInput = initialValue => {
             setValue(value)
         }
         if (datatype.value === 'year') {
-            const _val = value.replace('-','')
-            const year = _val.substr(0, 4);
-            const month = _val.substr(4, 2);
-            const date = _val.substr(6, 2);
+            const year = value.substr(0, 4) * 1;
+            const month = value.substr(5, 2) * 1;
+            const date = value.substr(8,) * 1;
+            if (year !== new Date().getFullYear() * 1) return;
+            if (month !== (new Date().getMonth() + 1) * 1) return;
 
-            console.log(_val)
-            if(value.length <5) setValue(year)
-            else if(value.length <7)setValue(year + '-' + addZero(month))
+            function dateCheck(date) {
+                if ([1, 3, 5, 7, 8, 10, 12].indexOf(month) !== -1 && date < 32) return true;
+                if ([4, 6, 9, 11].indexOf(month) !== -1 && date < 31) return true;
+                if (month === 2 && date < 29) return true;
+                return false;
+            }
+            if (value.length > 7 && dateCheck(date)) setValue(value)
         }
-
     }
-    return { onChange, value }
+    return { onChange, value, setValue }
 }
 
-const addZero = num => (num <10 && num*1 !== 0) ? '0'+ num : num
+const addZero = num => (num < 10 && num * 1 !== 0) ? '0' + num : num
 
-const AddSleepData = ({ addSleep, user, callbaclFn }) => {
+const AddSleepData = ({ addSleep, user, callbaclFn, isNew, editId, sleepObj, setSleep, _sleepData }) => {
     const _today = new Date();
     const step2HourInput = useInput(23);
     const step2MinuteInput = useInput(30);
-    const step3HourInput = useInput(23);
-    const step3MinuteInput = useInput(30);
+    const step3HourInput = useInput('07');
+    const step3MinuteInput = useInput('00');
     const step4YearInput = useInput(_today.getFullYear() + '-' + addZero(_today.getMonth() + 1) + '-' + addZero(_today.getDate()));
     const [step, setStep] = useState(0)
-    const [sleepData, setSleepData] = useState({
-        date: _today.getFullYear() + '' + (_today.getMonth() + 1) + '' + _today.getDate(),
-        sleepStart: '1203am',
-        sleepEnd: "0701am",
-        Rating: '3',
-    })
+    const [sleepData, setSleepData] = useState({ rating: 3 })
 
     useEffect(() => {
-        const contentEl = document.querySelector('.add-data-contents')
+        if (sleepObj) {
+            step2HourInput.setValue(sleepObj.sleepStart.substr(0, 2));
+            step2MinuteInput.setValue(sleepObj.sleepStart.substr(2, 2));
+            step3HourInput.setValue(sleepObj.sleepEnd.substr(0, 2));
+            step3MinuteInput.setValue(sleepObj.sleepEnd.substr(2, 2));
+            step4YearInput.setValue(sleepObj.date.substr(0, 4) + '-' + sleepObj.date.substr(4, 2) + '-' + sleepObj.date.substr(6, 2));
+            setSleepData({ ...sleepData, rating: sleepObj.rating })
+            setStep(0)
+            document.querySelectorAll('.add-data-step1-score').forEach(el => {
+                el.classList.remove('add-data-step1-selected', 'main-color')
+                if (el.attributes.rating.value === sleepObj.rating) {
+                    el.classList.add('add-data-step1-selected', 'main-color')
+                }
+            })
+        }
+    }, [sleepObj])
+
+    useEffect(() => {
+        const contentEl = isNew ? document.querySelector('.add-data-new .add-data-contents') :
+            document.querySelector('.add-data-edit .add-data-contents')
         contentEl.style.marginLeft = -250 * step + 'px'
+        setSleepData({
+            ...sleepData,
+            sleepStart: step2HourInput.value + '' + step2MinuteInput.value,
+            sleepEnd: step3HourInput.value + '' + step3MinuteInput.value,
+            date: step4YearInput.value.replaceAll('-', '')
+        })
     }, [step])
 
     const onBtnClick = e => {
@@ -62,25 +86,39 @@ const AddSleepData = ({ addSleep, user, callbaclFn }) => {
             if (step < 4)
                 setStep(step + 1)
             else {
-                if (window.confirm('추가 하시겠습니까?')) {
-                    FB_DB.add("sleep", {
-                        ...sleepData,
-                        uid: user.uid
-                    }, (id) => {
-                        addSleep({
+                if (isNew) {
+                    if (window.confirm('추가 하시겠습니까?')) {
+                        FB_DB.add("sleep", {
                             ...sleepData,
-                            uid: user.uid,
-                            id: id
+                            uid: user.uid
+                        }, (id) => {
+                            addSleep({
+                                ...sleepData,
+                                uid: user.uid,
+                                id: id
+                            })
+                        });
+                        callbaclFn();
+                        setStep(0)
+                        setSleepData({
+                            date: _today.getFullYear() + '' + (_today.getMonth() + 1) + '' + _today.getDate(),
+                            sleepStart: '1203am',
+                            sleepEnd: "0701am",
+                            rating: '3',
                         })
-                    });
-                    callbaclFn();
-                    setStep(0)
-                    setSleepData({
-                        date: _today.getFullYear() + '' + (_today.getMonth() + 1) + '' + _today.getDate(),
-                        sleepStart: '1203am',
-                        sleepEnd: "0701am",
-                        Rating: '3',
-                    })
+                    }
+                } else {
+                    if (window.confirm('수정 하시겠습니까?')) {
+                        FB_DB.update("sleep", sleepObj.id, {
+                            ...sleepData,
+                            uid: user.uid
+                        }, () => {
+                            setSleep(_sleepData.map(v => {
+                                return v.id === editId ? sleepData : v;
+                            }))
+                        })
+                        callbaclFn();
+                    }
                 }
             }
         }
@@ -94,7 +132,7 @@ const AddSleepData = ({ addSleep, user, callbaclFn }) => {
         setSleepData({ ...sleepData, rating: e.target.attributes.rating.value })
     }
 
-    return <div className='add-data-wrap'>
+    return <div className={'add-data-wrap ' + (isNew ? 'add-data-new' : 'add-data-edit')}>
         <div className='add-data-contents font-color'>
             <div className='add-data-step1'>
                 <div className='add-data-step-text main-color'>잘 주무셨나요? <br />일어났을 때 기분을 선택해주세요</div>
@@ -109,25 +147,25 @@ const AddSleepData = ({ addSleep, user, callbaclFn }) => {
             <div className='add-data-step2'>
                 <div className='add-data-step-text main-color'>몇시에 주무셨나요? <br />주무신 시간을 알려주세요</div>
                 <div className='add-data-step2-time'>
-                    <input className='add-data-step2-h main-color' {...step2HourInput} datatype='hour' /><span className='add-data-step2-tx main-color' >시</span>
-                    <input className='add-data-step2-m main-color' {...step2MinuteInput} datatype='minute' /><span className='add-data-step2-tx main-color' >분</span>
+                    <input className='add-data-step2-h main-color' onChange={step2HourInput.onChange} value={step2HourInput.value} datatype='hour' /><span className='add-data-step2-tx main-color' >시</span>
+                    <input className='add-data-step2-m main-color' onChange={step2MinuteInput.onChange} value={step2MinuteInput.value} datatype='minute' /><span className='add-data-step2-tx main-color' >분</span>
                 </div>
             </div>
             <div className='add-data-step3'>
                 <div className='add-data-step-text main-color'>몇시에 일어나셨나요? <br />일어난 시간을 알려주세요</div>
                 <div className='add-data-step3-time'>
-                    <input className='add-data-step3-h main-color' {...step3HourInput} datatype='hour' /><span className='add-data-step3-tx main-color' >시</span>
-                    <input className='add-data-step3-m main-color' {...step3MinuteInput} datatype='minute' /><span className='add-data-step3-tx main-color' >분</span>
+                    <input className='add-data-step3-h main-color' onChange={step3HourInput.onChange} value={step3HourInput.value} datatype='hour' /><span className='add-data-step3-tx main-color' >시</span>
+                    <input className='add-data-step3-m main-color' onChange={step3MinuteInput.onChange} value={step3MinuteInput.value} datatype='minute' /><span className='add-data-step3-tx main-color' >분</span>
                 </div>
             </div>
             <div className='add-data-step4'>
                 <div className='add-data-step-text main-color'>오늘이 맞나요?? <br />마지막으로 날짜를 확인해주세요</div>
                 <div className='add-data-step4-date'>
-                    <input className='add-data-step4-year main-color'  {...step4YearInput} datatype='year' />
+                    <input className='add-data-step4-year main-color' onChange={step4YearInput.onChange} value={step4YearInput.value} datatype='year' />
                 </div>
             </div>
             <div className='add-data-step5'>
-                <div className='add-data-step-text main-color'>등록을 완료하시려면 <br />done 버튼을 클릭해주세요</div>
+                <div className='add-data-step-text main-color'>{isNew ? '등록' : '수정'}을 완료하시려면 <br />done 버튼을 클릭해주세요</div>
             </div>
         </div>
         <div className='add-data-btn-wrap'>
@@ -137,14 +175,18 @@ const AddSleepData = ({ addSleep, user, callbaclFn }) => {
     </div>
 }
 
-function mapStateToProps(state) {
-    const { user } = state;
-    return { user }
+function mapStateToProps(state, props) {
+    const { editId } = props
+    const { user, sleepData } = state;
+    const sleepObj = sleepData.filter(v => v.id === editId)[0]
+    const _sleepData = sleepData;
+    return { user, sleepObj, _sleepData }
 }
 
 function mapDispatchProps(dispatch) {
     return {
         addSleep: (id) => dispatch(ACTION.addSleep(id)),
+        setSleep: (id) => dispatch(ACTION.setSleep(id)),
     }
 }
 

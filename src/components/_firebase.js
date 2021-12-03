@@ -43,9 +43,10 @@ export const FB_DB = {
   delete:(name,id)=>{
     deleteDoc(doc(db,name,id));
   },
-  update:(name,id,data)=>{
+  update:(name,id,data,callback)=>{
     updateDoc(doc(db, name, id),data).then(()=>{
       alert('수정이 완료되었습니다.')
+      callback();
     });
   }
 }
