@@ -68,7 +68,7 @@ function App({ setUser, connectSleepDB, connectThemeDB, colorSet }) {
       //user정보가 없을 때
       else { setIsLogedIn(false); setIsLoading(false); }
     })
-  }, [])
+  }, [connectSleepDB,setUser,connectThemeDB])
 
   return (
     isLoading ?

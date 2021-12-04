@@ -58,7 +58,8 @@
 
 .add-data-step2-h,.add-data-step2-m,.add-data-step3-h,.add-data-step3-m{
     border: none;
-    width: 35px;
+    width: 45px;
+    margin-left: -16px;
     font-size: 1em;
     text-align: right;
     height: 32px;

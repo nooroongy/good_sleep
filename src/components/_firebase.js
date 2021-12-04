@@ -37,6 +37,7 @@ export const FB_DB = {
   },
   add:(name,obj,callback)=>{
     addDoc(collection(db,name),obj).then((res)=>{
+      if(typeof callback === 'function')
       callback(res.id);
     });
   },
@@ -46,6 +47,7 @@ export const FB_DB = {
   update:(name,id,data,callback)=>{
     updateDoc(doc(db, name, id),data).then(()=>{
       alert('수정이 완료되었습니다.')
+      if(typeof callback === 'function')
       callback();
     });
   }
