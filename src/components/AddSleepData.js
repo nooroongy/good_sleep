@@ -23,6 +23,7 @@ const AddSleepData = ({ addSleep, user, callbaclFn, isNew, editId, sleepObj, set
             step3MinuteInput.setValue(sleepObj.sleepEnd.substr(2, 2));
             step4YearInput.setValue(sleepObj.date.substr(0, 4) + '-' + sleepObj.date.substr(4, 2) + '-' + sleepObj.date.substr(6, 2));
             setSleepData(prev => { return { ...prev, rating: sleepObj.rating } })
+            // setSleepData({ ...sleepData, rating: sleepObj.rating })
             setStep(0)
             document.querySelectorAll('.add-data-step1-score').forEach(el => {
                 el.classList.remove('add-data-step1-selected', 'main-color')
@@ -31,7 +32,7 @@ const AddSleepData = ({ addSleep, user, callbaclFn, isNew, editId, sleepObj, set
                 }
             })
         }
-    }, [sleepObj, step2HourInput, step2MinuteInput, step3HourInput, step3MinuteInput, step4YearInput])
+    }, [sleepObj])
 
     // step이 바뀔때마다 초기값 세팅
     useEffect(() => {
