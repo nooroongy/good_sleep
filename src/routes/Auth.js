@@ -2,7 +2,7 @@ import { FB_AUTH } from '../components/_firebase'
 
 const Auth = () => {
     function onClickSignInPopBtn() {
-        FB_AUTH.signInWithGoogle(true);
+        FB_AUTH.signInWithGoogle(false);
     }
 
     return (<>

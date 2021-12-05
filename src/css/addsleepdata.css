@@ -51,7 +51,8 @@
 }
 
 .add-data-step2-h,.add-data-step2-m,.add-data-step3-h,.add-data-step3-m,.add-data-step-text,.add-data-step2-tx,.add-data-step3-tx,.add-data-step4-date>*{
-    color: transparent;
+    color:black;
+    -webkit-text-fill-color: transparent;
     -webkit-background-clip: text !important;
     background-clip: text !important;
 }
