@@ -11,6 +11,7 @@
     transition: 0.7s;
     width: 85%;
     padding: 3px;
+    max-width: 385px;
 }
 
 .sleepcard-new-wrap{

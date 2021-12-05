@@ -42,7 +42,11 @@ const Record = ({ sleepData }) => {
 
 function mapStateToProps(state) {
     const { sleepData } = state;
-    return { sleepData }
+    let sortedSleepData = [...sleepData];
+    // if(sortedSleepData){
+    //     sortedSleepData.sort((a,b)=>b.date - a.date)
+    // }
+    return { sleepData:sortedSleepData }
 }
 
 export default connect(mapStateToProps)(Record);

@@ -50,7 +50,7 @@
     font-size: 1.8em;
 }
 
-.add-data-step2-h,.add-data-step2-m,.add-data-step3-h,.add-data-step3-m,.add-data-step-text,.add-data-step2-tx,.add-data-step3-tx,.add-data-step4-date>*{
+.add-data-step-text,.add-data-step2-tx,.add-data-step3-tx,.add-data-step4-date>*{
     color:black;
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text !important;
@@ -59,12 +59,14 @@
 
 .add-data-step2-h,.add-data-step2-m,.add-data-step3-h,.add-data-step3-m{
     border: none;
-    width: 45px;
-    margin-left: -16px;
+    width: 41px;
+    margin-left: -9px;
     font-size: 1em;
     text-align: right;
     height: 32px;
-    letter-spacing: -3px;
+    letter-spacing: -1px;
+    font-weight: 500;
+    color:#565656;
 }
 
 .add-data-step2-tx,.add-data-step3-tx{

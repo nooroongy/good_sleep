@@ -7,6 +7,7 @@
 .home-wrap>*{
     margin-bottom: 10px;
     width: 85%;
+    max-width: 385px;
 }
 
 .home-tips{
@@ -82,4 +83,38 @@
     position: absolute;
     left: 15px;
     bottom: 8px;
+}
+
+.home-graph-wrap{
+    height: 160px;
+    display: flex;
+    padding: 8px 20px;
+}
+
+.home-graph-data{
+    display: grid;
+    align-items: end;
+    grid-template-rows: 4fr 1fr;
+}
+
+.home-graph-bar{
+    display: inline-block;
+    width: 13px;
+    margin-right: 2px;
+}
+
+.home-graph-rating1{opacity: 0.3;}
+.home-graph-rating2{opacity: 0.45;}
+.home-graph-rating3{opacity: 0.6;}
+.home-graph-rating4{opacity: 0.75;}
+.home-graph-rating5{opacity: 9;}
+
+.home-graph-date{
+    font-weight: 300;
+    font-size: 0.6em;
+    letter-spacing: -0.1em;
+    transform: rotate(270deg) translate(-7px,1px);
+    display: inline-block;
+    width: 13px;
+    color: #cbcbcb;
 }

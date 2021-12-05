@@ -14,7 +14,12 @@ const slice = createSlice({
     },
     reducers: {
         setUser: (state, action) => { state.user = action.payload },
-        setSleep: (state, action) => { state.sleepData = action.payload },
+        setSleep: (state, action) => { 
+            let soltTmp = [...action.payload]
+            soltTmp.sort((a,b)=>b.date -a.date)
+
+            state.sleepData = soltTmp
+        },
         setColorSet: (state, action) => { state.colorSet = action.payload },
         removeSleep: (state, action) => {
             state.sleepData = state.sleepData.filter(data => data.id !== action.payload)

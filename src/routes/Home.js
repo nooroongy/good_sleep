@@ -5,21 +5,40 @@ import { FB_DB } from "../components/_firebase";
 import '../css/home.css'
 
 const Home = ({ user, sleepData = [], connectSleepDB }) => {
-    function dbTest() {
-        FB_DB.add("sleep", {
-            date: '20211125',
-            sleepStart: '1203am',
-            sleepEnd: "0701am",
-            Rating: '8',
-            uid: user.uid
-        });
+    
+    function getSleepTime(time1,time2){
+        const h1 = time1.substr(0,2)*1;
+        const m1 = time1.substr(2,2)*1;
+        const h2 = time2.substr(0,2)*1;
+        const m2 = time2.substr(2,2)*1;
 
-        FB_DB.get('sleep').then(res => {
-            connectSleepDB(res.filter(data => data.uid === user.uid))
-        })
+       let diffH = h1> h2 ? 24+h2-h1 : h2-h1;
+       let diffM = m2-m1;
+
+       if(diffM <0){
+            diffM += 60;
+           diffH--;
+       }
+
+       return diffH*60 +diffM
     }
 
     return (<div className='home-wrap'>
+        <Card title={'graph'}>
+            <div className='home-graph-wrap'>
+                {sleepData.map(v => {
+                    const height = (getSleepTime(v.sleepStart,v.sleepEnd))/4;
+                    return <span className='home-graph-data'>
+                        <span className={'home-graph-bar home-graph-rating'+v.rating+' home-graph-sleeptime sub-color'} 
+                        style={{height:height > 128 ? 128 : height+'px'}}>
+                        </span>
+                        <span className='home-graph-date'>{v.date}</span>
+                    </span>
+                })}
+            </div>
+
+        </Card>
+
         <Card title={'for you'}>
             <div className='home-for-you-wrap'>
                 <span className='home-for-you-hour-wrap'>
@@ -37,7 +56,7 @@ const Home = ({ user, sleepData = [], connectSleepDB }) => {
         </Card>
 
         <Card title={'today'}>
-            <button onClick={dbTest} className='home-add-btn font-icon'>add</button>
+            <button  className='home-add-btn font-icon'>add</button>
         </Card>
 
         <Card title={'tips'}>

@@ -61,7 +61,10 @@ const AddSleepData = ({ addSleep, user, callbaclFn, isNew, editId, sleepObj, set
                 setStep(step + 1)
             else {
                 if (isNew) {
-                    if (window.confirm('추가 하시겠습니까?')) {
+                    if(_sleepData.filter(v=>v.date === sleepData.date).length != 0){
+                        window.alert('해당 날자에 이미 데이터가 존재합니다.')
+                    }
+                    else if (window.confirm('추가 하시겠습니까?')) {
                         FB_DB.add("sleep", {
                             ...sleepData,
                             uid: user.uid
@@ -121,15 +124,15 @@ const AddSleepData = ({ addSleep, user, callbaclFn, isNew, editId, sleepObj, set
             <div className='add-data-step2'>
                 <div className='add-data-step-text main-color'>몇시에 주무셨나요? <br />주무신 시간을 알려주세요</div>
                 <div className='add-data-step2-time'>
-                    <input className='add-data-step2-h main-color' onChange={step2HourInput.onChange} value={step2HourInput.value} datatype='hour' /><span className='add-data-step2-tx main-color' >시</span>
-                    <input className='add-data-step2-m main-color' onChange={step2MinuteInput.onChange} value={step2MinuteInput.value} datatype='minute' /><span className='add-data-step2-tx main-color' >분</span>
+                    <input className='add-data-step2-h' onChange={step2HourInput.onChange} value={step2HourInput.value} datatype='hour' /><span className='add-data-step2-tx main-color' >시</span>
+                    <input className='add-data-step2-m' onChange={step2MinuteInput.onChange} value={step2MinuteInput.value} datatype='minute' /><span className='add-data-step2-tx main-color' >분</span>
                 </div>
             </div>
             <div className='add-data-step3'>
                 <div className='add-data-step-text main-color'>몇시에 일어나셨나요? <br />일어난 시간을 알려주세요</div>
                 <div className='add-data-step3-time'>
-                    <input className='add-data-step3-h main-color' onChange={step3HourInput.onChange} value={step3HourInput.value} datatype='hour' /><span className='add-data-step3-tx main-color' >시</span>
-                    <input className='add-data-step3-m main-color' onChange={step3MinuteInput.onChange} value={step3MinuteInput.value} datatype='minute' /><span className='add-data-step3-tx main-color' >분</span>
+                    <input className='add-data-step3-h' onChange={step3HourInput.onChange} value={step3HourInput.value} datatype='hour' /><span className='add-data-step3-tx main-color' >시</span>
+                    <input className='add-data-step3-m' onChange={step3MinuteInput.onChange} value={step3MinuteInput.value} datatype='minute' /><span className='add-data-step3-tx main-color' >분</span>
                 </div>
             </div>
             <div className='add-data-step4'>
