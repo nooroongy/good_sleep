@@ -57,9 +57,9 @@ function SleepCard({ sleepData, id, removeSleep, addSleep,user,addBtnClick ,edit
         addBtnClick()
     }
 
-    return <div className={'sub-color sleepcard-wrap font-color ' + (isDeleted ? 'deleted' : '')}>
+    return <div className={'sub-color sleepcard-wrap ' + (isDeleted ? 'deleted' : '')}>
         {id !== 'new' ? <div className='sleepcard-old-wrap'>
-            <div className='sleepcard-header sub-color'>
+            <div className='sleepcard-header sub-color font-color '>
                 <span className='sleepcard-date'>{date}</span>
             </div>
             <div className='sleepcard-body theme-color'>
@@ -72,7 +72,7 @@ function SleepCard({ sleepData, id, removeSleep, addSleep,user,addBtnClick ,edit
             </div>
         </div>
             : <>
-                <div className='sleepcard-new-wrap sub-color'>
+                <div className='sleepcard-new-wrap sub-color font-color '>
                     <span className='sleepcard-plus-btn' onClick={onAddBtnClick}>add</span>
                 </div>
             </>

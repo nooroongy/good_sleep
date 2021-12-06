@@ -41,6 +41,7 @@ const AddSleepData = ({ addSleep, user, callbaclFn, isNew, editId, sleepObj, set
             document.querySelector('.add-data-edit .add-data-contents')
         contentEl.style.marginLeft = -250 * step + 'px'
         setSleepData(prev=>{
+            console.log(prev)
             return {
                 ...prev,
                 sleepStart: step2HourInput.value + '' + step2MinuteInput.value,
@@ -61,10 +62,11 @@ const AddSleepData = ({ addSleep, user, callbaclFn, isNew, editId, sleepObj, set
                 setStep(step + 1)
             else {
                 if (isNew) {
-                    if(_sleepData.filter(v=>v.date === sleepData.date).length != 0){
-                        window.alert('해당 날자에 이미 데이터가 존재합니다.')
-                    }
-                    else if (window.confirm('추가 하시겠습니까?')) {
+                    // if(_sleepData.filter(v=>v.date === sleepData.date).length != 0){
+                    //     window.alert('해당 날자에 이미 데이터가 존재합니다.')
+                    // }
+                    // else 
+                    if (window.confirm('추가 하시겠습니까?')) {
                         FB_DB.add("sleep", {
                             ...sleepData,
                             uid: user.uid

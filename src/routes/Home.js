@@ -5,59 +5,87 @@ import { FB_DB } from "../components/_firebase";
 import '../css/home.css'
 
 const Home = ({ user, sleepData = [], connectSleepDB }) => {
-    
-    function getSleepTime(time1,time2){
-        const h1 = time1.substr(0,2)*1;
-        const m1 = time1.substr(2,2)*1;
-        const h2 = time2.substr(0,2)*1;
-        const m2 = time2.substr(2,2)*1;
 
-       let diffH = h1> h2 ? 24+h2-h1 : h2-h1;
-       let diffM = m2-m1;
+    function getSleepTime(time1, time2) {
+        const h1 = time1.substr(0, 2) * 1;
+        const m1 = time1.substr(2, 2) * 1;
+        const h2 = time2.substr(0, 2) * 1;
+        const m2 = time2.substr(2, 2) * 1;
 
-       if(diffM <0){
+        let diffH = h1 > h2 ? 24 + h2 - h1 : h2 - h1;
+        let diffM = m2 - m1;
+
+        if (diffM < 0) {
             diffM += 60;
-           diffH--;
-       }
+            diffH--;
+        }
 
-       return diffH*60 +diffM
+        return diffH * 60 + diffM
     }
 
+    const sleepDataFor = sleepData.map(v => {
+        return {
+            rating: v.rating,
+            sleepStart:v.sleepStart,
+            sleepTime: getSleepTime(v.sleepStart, v.sleepEnd)/10
+        }
+    })
+
+    let findBestTime=[];
+
+    sleepDataFor.forEach(v=>{
+        if(findBestTime.filter(time=>time.time === v.sleepTime).length === 0)findBestTime.push({time:v.sleepTime,score:0})
+
+        findBestTime.forEach((times,i)=>{
+            if(times.time === v.sleepTime) findBestTime[i].score += (v.rating-3)*1;
+        })
+    })
+
+    findBestTime.sort((a,b)=>b.score-a.score)
+    console.log(findBestTime)
+
+    const bestTime = findBestTime[0].time*10/60;
+    console.log()
+
     return (<div className='home-wrap'>
-        <Card title={'graph'}>
-            <div className='home-graph-wrap'>
-                {sleepData.map(v => {
-                    const height = (getSleepTime(v.sleepStart,v.sleepEnd))/4;
-                    return <span className='home-graph-data'>
-                        <span className={'home-graph-bar home-graph-rating'+v.rating+' home-graph-sleeptime sub-color'} 
-                        style={{height:height > 128 ? 128 : height+'px'}}>
+        <div className='home-wrap-full'>
+            <Card title={'time line'}>
+                <div className='home-graph-wrap'>
+                    {sleepData.map(v => {
+                        const height = (getSleepTime(v.sleepStart, v.sleepEnd)) / 4;
+                        return <span className='home-graph-data' key={v.id}>
+                            <span className={'home-graph-bar home-graph-rating' + v.rating + ' home-graph-sleeptime sub-color'}
+                                style={{ height: height > 128 ? 128 : height + 'px' }}>
+                            </span>
+                            <span className='home-graph-date'>{`${v.date.substr(0, 4)}/${v.date.substr(4, 2)}/${v.date.substr(6, 2)}`}</span>
                         </span>
-                        <span className='home-graph-date'>{v.date}</span>
-                    </span>
-                })}
-            </div>
+                    })}
+                </div>
+            </Card>
+        </div>
 
-        </Card>
+        <div className='home-wrap-half'>
+            <Card title={'sleep for'}>
+                <div className='home-for-you-wrap'>
+                    <span className='home-for-you-hour main-color'>{bestTime}</span>
+                    {/* <span className='home-for-you-base'>123일간의 데이터를 기반으로 추천</span> */}
+                </div>
+            </Card>
+            <Card title={'sleep at'}>
+                <div className='home-at-you-wrap'>
+                    <span className='home-at-you-hour main-color'>23:00</span>
+                    {/* <span className='home-for-you-base'>123일간의 데이터를 기반으로 추천</span> */}
+                </div>
+            </Card>
+        </div>
 
-        <Card title={'for you'}>
-            <div className='home-for-you-wrap'>
-                <span className='home-for-you-hour-wrap'>
-                    <span className='home-for-you-hour'>7</span>
-                    {/* <span className='home-for-you-hour-tx'>.</span>
-                    <span className='home-for-you-hour2'>5</span> */}
-                    <span className='home-for-you-hour-tx'>h</span>
-                    <span className='home-for-you-hour-text'>추천 수면시간</span>
-                </span>
-                <span className='home-for-you-data'>4시간이상 주무시는것을 추천드립니다.</span>
-                <span className='home-for-you-data'>2시 전에는 주무시는게 좋습니다</span>
-                <span className='home-for-you-base'>123일간의 데이터를 기반으로 추천</span>
 
-            </div>
-        </Card>
+        <div className='home-wrap-full'>
 
-        <Card title={'today'}>
-            <button  className='home-add-btn font-icon'>add</button>
-        </Card>
+            <Card title={'today'}>
+                <button className='home-add-btn font-icon'>add</button>
+            </Card>
+        </div>
 
         <Card title={'tips'}>
             <div className='home-tips'>

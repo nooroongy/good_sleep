@@ -4,10 +4,31 @@
     padding-top: 60px;
 }
 
-.home-wrap>*{
-    margin-bottom: 10px;
+.home-wrap-half{
+    width: 85%;
+    display: inline-grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.home-wrap-half>*:nth-child(1){
+    margin-right: 10px;
+}
+
+.home-wrap-half>*:nth-child(2){
+    margin-left: 10px;
+}
+
+.home-wrap-full{
     width: 85%;
     max-width: 385px;
+}
+
+.home-wrap-full>*{
+    width: 100%;
+}
+
+.home-wrap>*{
+    margin-bottom: 10px;
 }
 
 .home-tips{
@@ -28,28 +49,12 @@
     color: white;
 }
 
-.home-for-you-wrap{
-    display: grid;
-    grid-template-columns: 2.3fr 7fr;
-    grid-template-rows: 1fr 1fr 1.5fr;
-    padding-top: 7px;
-    justify-content: center;
+.home-for-you-wrap,.home-at-you-wrap{
+    display: inline-flex;
+    width: 100%;
+    height: 55px;
 }
 
-.home-for-you-hour-wrap{
-    grid-row: 1/4;
-}
-
-.home-for-you-hour-wrap>*{
-    display: inline-block;
-}
-.home-for-you-data{
-    font-family: 'Noto Sans KR';
-    font-size: 0.7em;
-    text-align: left;
-    padding-left: 11px;
-    font-style: italic;
-}
 .home-for-you-base{
     font-family: 'Noto Sans KR';
     font-size: 0.6em;
@@ -61,20 +66,22 @@
     font-weight: 100;
 }
 
-.home-for-you-hour{
-    font-size: 2.7em;
-    margin: -11px 0px -6px 8px;
-    font-weight: 700;
-    width: 23px;
+.home-for-you-hour,.home-at-you-hour{
+    font-weight: 800;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    width: 100%;
 }
 
-.home-for-you-hour2{
-    font-weight: 600;
-    font-size: 1.3em;
+.home-for-you-hour{
+    font-size: 2.7em;
+    letter-spacing: -4px;
 }
-.home-for-you-hour-tx{
-    font-size: 1.1em;
-    margin-left: 2px;
+
+.home-at-you-hour{
+    font-size: 2.5em;
+    letter-spacing: -3px;
 }
 
 .home-for-you-hour-text{
@@ -86,7 +93,7 @@
 }
 
 .home-graph-wrap{
-    height: 160px;
+    height: 175px;
     display: flex;
     padding: 8px 20px;
 }
@@ -94,7 +101,7 @@
 .home-graph-data{
     display: grid;
     align-items: end;
-    grid-template-rows: 4fr 1fr;
+    grid-template-rows: 4fr 1.3fr;
 }
 
 .home-graph-bar{
