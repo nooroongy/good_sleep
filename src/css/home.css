@@ -2,20 +2,22 @@
     display: grid;
     justify-items:center;
     padding-top: 60px;
+    padding-bottom: 70px;
 }
 
 .home-wrap-half{
     width: 85%;
     display: inline-grid;
     grid-template-columns: 1fr 1fr;
+    max-width: 385px;
 }
 
 .home-wrap-half>*:nth-child(1){
-    margin-right: 10px;
+    margin-right: 8px;
 }
 
 .home-wrap-half>*:nth-child(2){
-    margin-left: 10px;
+    margin-left: 8px;
 }
 
 .home-wrap-full{
@@ -75,8 +77,9 @@
 }
 
 .home-for-you-hour{
-    font-size: 2.7em;
-    letter-spacing: -4px;
+    font-size: 2.1em;
+    letter-spacing: -2.1px;
+    margin-top: auto;
 }
 
 .home-at-you-hour{
@@ -93,21 +96,23 @@
 }
 
 .home-graph-wrap{
-    height: 175px;
+    /* height: 175px; */
+    height: 115px;
     display: flex;
-    padding: 8px 20px;
+    padding: 2px 20px;
 }
 
 .home-graph-data{
     display: grid;
     align-items: end;
-    grid-template-rows: 4fr 1.3fr;
+    grid-template-rows: 4fr 1.1fr;
 }
 
 .home-graph-bar{
     display: inline-block;
-    width: 13px;
+    width: 11px;
     margin-right: 2px;
+    /* margin-bottom: 12px; */
 }
 
 .home-graph-rating1{opacity: 0.3;}
@@ -124,4 +129,21 @@
     display: inline-block;
     width: 13px;
     color: #cbcbcb;
+    letter-spacing: -1.5px;
+}
+
+.home-score-wrap{
+    width: 85vw;
+    max-width: 385px;
+    height: 200px;
+    overflow: hidden;
+}
+
+.home-score-box{
+    width: 305px;
+    height: 150px;
+    margin: auto;
+    border-left: 2px solid black;
+    border-bottom: 2px solid black;
+    margin-top: 13px;
 }

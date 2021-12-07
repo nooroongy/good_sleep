@@ -5,8 +5,7 @@ import { FB_DB } from "../components/_firebase";
 import '../css/home.css'
 
 const Home = ({ user, sleepData = [], connectSleepDB }) => {
-
-    function getSleepTime(time1, time2) {
+    function getSleepTime(time1, time2, str = false) {
         const h1 = time1.substr(0, 2) * 1;
         const m1 = time1.substr(2, 2) * 1;
         const h2 = time2.substr(0, 2) * 1;
@@ -20,44 +19,43 @@ const Home = ({ user, sleepData = [], connectSleepDB }) => {
             diffH--;
         }
 
-        return diffH * 60 + diffM
+        return str ? (diffH + 'h ' + diffM + 'm') : diffH * 60 + diffM
     }
 
     const sleepDataFor = sleepData.map(v => {
         return {
             rating: v.rating,
-            sleepStart:v.sleepStart,
-            sleepTime: getSleepTime(v.sleepStart, v.sleepEnd)/10
+            sleepStart: v.sleepStart,
+            sleepTimeStr: getSleepTime(v.sleepStart, v.sleepEnd, true),
+            sleepTime: getSleepTime(v.sleepStart, v.sleepEnd)
         }
     })
 
-    let findBestTime=[];
+    let findBestTime = [];
 
-    sleepDataFor.forEach(v=>{
-        if(findBestTime.filter(time=>time.time === v.sleepTime).length === 0)findBestTime.push({time:v.sleepTime,score:0})
+    sleepDataFor.forEach(v => {
+        if (findBestTime.filter(time => time.time === v.sleepTimeStr).length === 0) findBestTime.push({ time: v.sleepTimeStr, score: 0 })
 
-        findBestTime.forEach((times,i)=>{
-            if(times.time === v.sleepTime) findBestTime[i].score += (v.rating-3)*1;
+        findBestTime.forEach((times, i) => {
+            if (times.time === v.sleepTimeStr) findBestTime[i].score += (v.rating - 3) * 1;
         })
     })
 
-    findBestTime.sort((a,b)=>b.score-a.score)
-    console.log(findBestTime)
+    findBestTime.sort((a, b) => b.score - a.score)
 
-    const bestTime = findBestTime[0].time*10/60;
-    console.log()
+    const bestTime = findBestTime[0].time;
 
     return (<div className='home-wrap'>
         <div className='home-wrap-full'>
             <Card title={'time line'}>
                 <div className='home-graph-wrap'>
                     {sleepData.map(v => {
-                        const height = (getSleepTime(v.sleepStart, v.sleepEnd)) / 4;
+                        const height = (getSleepTime(v.sleepStart, v.sleepEnd)-120) / 5;
                         return <span className='home-graph-data' key={v.id}>
                             <span className={'home-graph-bar home-graph-rating' + v.rating + ' home-graph-sleeptime sub-color'}
-                                style={{ height: height > 128 ? 128 : height + 'px' }}>
+                                style={{ height: height > 80 ? 80 : height + 'px' }}>
                             </span>
-                            <span className='home-graph-date'>{`${v.date.substr(0, 4)}/${v.date.substr(4, 2)}/${v.date.substr(6, 2)}`}</span>
+                            <span className='home-graph-date'>{`${v.date.substr(2, 2)}/${v.date.substr(4, 2)}/${v.date.substr(6, 2)}`}</span>
                         </span>
                     })}
                 </div>
@@ -81,47 +79,21 @@ const Home = ({ user, sleepData = [], connectSleepDB }) => {
 
 
         <div className='home-wrap-full'>
-
-            <Card title={'today'}>
-                <button className='home-add-btn font-icon'>add</button>
+            <Card title={'score board'}>
+                <div className='home-score-wrap'>
+                    <div className='home-score-box'></div>
+                </div>
             </Card>
         </div>
 
-        <Card title={'tips'}>
-            <div className='home-tips'>
-                알고 계셨나요? 우리의 수면은 처음 90분이 가장 중요하다는 사실<br />
-                잠에들고 처음으로 맞이하는 깊은수면의 질에 따라 나머지 수면의 질도 변한다고 합니다.
-            </div>
-        </Card>
-
-        <Card title={'tips'}>
-            <div className='home-tips'>
-                알고 계셨나요? 우리의 수면은 처음 90분이 가장 중요하다는 사실<br />
-                잠에들고 처음으로 맞이하는 깊은수면의 질에 따라 나머지 수면의 질도 변한다고 합니다.
-            </div>
-        </Card>
-
-        <Card title={'tips'}>
-            <div className='home-tips'>
-                알고 계셨나요? 우리의 수면은 처음 90분이 가장 중요하다는 사실<br />
-                잠에들고 처음으로 맞이하는 깊은수면의 질에 따라 나머지 수면의 질도 변한다고 합니다.
-            </div>
-        </Card>
-
-        <Card title={'tips'}>
-            <div className='home-tips'>
-                알고 계셨나요? 우리의 수면은 처음 90분이 가장 중요하다는 사실<br />
-                잠에들고 처음으로 맞이하는 깊은수면의 질에 따라 나머지 수면의 질도 변한다고 합니다.
-            </div>
-        </Card>
-
-        <Card title={'tips'}>
-            <div className='home-tips'>
-                알고 계셨나요? 우리의 수면은 처음 90분이 가장 중요하다는 사실<br />
-                잠에들고 처음으로 맞이하는 깊은수면의 질에 따라 나머지 수면의 질도 변한다고 합니다.
-            </div>
-        </Card>
-
+        <div className='home-wrap-full'>
+            <Card title={'tips'}>
+                <div className='home-tips'>
+                    알고 계셨나요? 우리의 수면은 처음 90분이 가장 중요하다는 사실<br />
+                    잠에들고 처음으로 맞이하는 깊은수면의 질에 따라 나머지 수면의 질도 변한다고 합니다.
+                </div>
+            </Card>
+        </div>
     </div>)
 }
 
