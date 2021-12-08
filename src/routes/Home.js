@@ -19,7 +19,7 @@ const Home = ({ user, sleepData = [], connectSleepDB }) => {
             diffH--;
         }
 
-        return str ? (diffH + 'h ' + diffM + 'm') : diffH * 60 + diffM
+        return str ? (diffH + 'H ' + diffM + 'M') : diffH * 60 + diffM
     }
 
     const sleepDataFor = sleepData.map(v => {
@@ -81,7 +81,35 @@ const Home = ({ user, sleepData = [], connectSleepDB }) => {
         <div className='home-wrap-full'>
             <Card title={'score board'}>
                 <div className='home-score-wrap'>
-                    <div className='home-score-box'></div>
+                    <div className='home-score-box'>
+                        <span className='home-score-horizontal-wrap sub-color'>
+                            <span className='home-score-horizontal-line'></span>
+                            <span className='home-score-horizontal-line'></span>
+                            <span className='home-score-horizontal-line'></span>
+                            <span className='home-score-horizontal-line'></span>
+                            <span className='home-score-horizontal-line'></span>
+                        </span>
+                        <span className='home-score-vertical-wrap sub-color'>
+                            <span className='home-score-vertical-line'></span>
+                            <span className='home-score-vertical-line'></span>
+                            <span className='home-score-vertical-line'></span>
+                            <span className='home-score-vertical-line'></span>
+                            <span className='home-score-vertical-line'></span>
+                            <span className='home-score-vertical-line'></span>
+                            <span className='home-score-vertical-line'></span>
+                            <span className='home-score-vertical-line'></span>
+                        </span>
+                        <span className='home-srore-time-tx'>time</span>
+                        <span className='home-srore-rating-tx'>rating</span>
+                        {sleepData.map(v=>{
+                            const bottom = v.rating*30-5;
+                            const left = (getSleepTime(v.sleepStart, v.sleepEnd) -120)*2/3
+
+                            return <span className='home-score-dot main-color'
+                                style={{bottom,left}}
+                            ></span>
+                        })}
+                    </div>
                 </div>
             </Card>
         </div>
