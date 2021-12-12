@@ -43,7 +43,8 @@ const Home = ({ user, sleepData = [], connectSleepDB }) => {
 
     findBestTime.sort((a, b) => b.score - a.score)
 
-    const bestTime = findBestTime[0].time;
+    
+    const bestTime = findBestTime.length > 0 ? findBestTime[0].time :'';
 
     return (<div className='home-wrap'>
         <div className='home-wrap-full'>
