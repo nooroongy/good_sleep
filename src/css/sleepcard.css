@@ -55,7 +55,7 @@
     padding-left: 25px;
 }
 
-.sleepcard-data,.sleepcard-icon{
+.sleepcard-icon{
     color: transparent;
     -webkit-background-clip: text !important;
     background-clip: text !important;
@@ -64,6 +64,12 @@
 .sleepcard-data{
     display: flex;
     align-items: center;
+}
+
+.sleepcard-data>*{
+    color: transparent;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
 }
 
 .sleepcard-icon{

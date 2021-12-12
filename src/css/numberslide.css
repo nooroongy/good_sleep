@@ -1,0 +1,62 @@
+.numberslide-wrap{
+    display: inline-block;
+    position: relative;
+    width: 50px;
+    height: 100px;
+    transform: scale(0.7);
+    transform-origin: 0 0;
+    margin-right: -25px;
+    font-size: 1.8em;
+}
+.numberslide-up-btn,.numberslide-down-btn{
+    color: transparent;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    position: absolute;
+    font-size: 1.3em;
+    z-index: 2;
+    left: 6.5px;
+    opacity: 0.6;
+}
+
+.numberslide-up-btn{
+    top: -6px;
+}
+
+.numberslide-down-btn{
+    bottom: 10px;
+}
+
+.numberslide-number-box{
+    overflow: hidden;
+    height: 80px;
+    display: inline-block;
+    position: absolute;
+    font-size: 2em;
+    width: 50px;
+    top: 0;
+    left: 0;
+}
+.numberslide-disply{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    height: 80px;
+    transition: .15s;
+    margin-top: -80px;
+}
+.numberslide-prev-num{
+
+}
+.numberslide-cur-num{
+
+}
+.numberslide-next-num{
+
+}
+
+.numberslide-prev-num,.numberslide-cur-num,.numberslide-next-num{
+    color: transparent;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    height: 80px;
+}

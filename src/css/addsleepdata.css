@@ -47,7 +47,8 @@
 
 .add-data-step2-time,.add-data-step3-time{
     margin-top: 15px;
-    font-size: 1.8em;
+    display: grid;
+    grid-template-columns: 2.8fr 1fr 2fr 1fr 4.3fr;
 }
 
 .add-data-step-text,.add-data-step2-tx,.add-data-step3-tx,.add-data-step4-date>*{

@@ -25,7 +25,7 @@ const slice = createSlice({
             state.sleepData = state.sleepData.filter(data => data.id !== action.payload)
         },
         addSleep:(state, action)=>{
-            state.sleepData.push(action.payload)
+            state.sleepData = [action.payload,...state.sleepData];
         }
     }
 })

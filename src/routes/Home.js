@@ -106,7 +106,7 @@ const Home = ({ user, sleepData = [], connectSleepDB }) => {
                             const left = (getSleepTime(v.sleepStart, v.sleepEnd) -120)*2/3
 
                             return <span className='home-score-dot main-color'
-                                style={{bottom,left}}
+                                style={{bottom,left}}  key={v.id}
                             ></span>
                         })}
                     </div>

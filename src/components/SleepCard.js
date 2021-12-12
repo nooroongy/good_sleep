@@ -63,9 +63,9 @@ function SleepCard({ sleepData, id, removeSleep, addSleep,user,addBtnClick ,edit
                 <span className='sleepcard-date'>{date}</span>
             </div>
             <div className='sleepcard-body theme-color'>
-                <span className='sleepcard-data main-color'>
-                    <span className='sleepcard-emoji font-icon'>{emoji}</span>
-                    <span className='sleepcard-tx'>{sleepTime}</span>
+                <span className='sleepcard-data'>
+                    <span className='sleepcard-emoji font-icon  main-color'>{emoji}</span>
+                    <span className='sleepcard-tx main-color'>{sleepTime}</span>
                 </span>
                 <span className='sleepcard-icon font-icon main-color' onClick={onEditBtnClick}>edit</span>
                 <span className='sleepcard-icon font-icon main-color' onClick={deleteBtnClick}>delete_forever</span>

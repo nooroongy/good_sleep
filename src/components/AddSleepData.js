@@ -1,29 +1,64 @@
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import '../css/addsleepdata.css'
+import NumberSlide from './NumberSlide';
 import { ACTION } from './store';
 import { FB_DB } from './_firebase';
 
 const AddSleepData = ({ addSleep, user, callbaclFn, isNew, editId, sleepObj, setSleep, _sleepData }) => {
     const _today = new Date();
-    const step2HourInput = useInput(23);
-    const step2MinuteInput = useInput(30);
-    const step3HourInput = useInput('07');
-    const step3MinuteInput = useInput('00');
+    const [startH1, setStartH1] = useState(2);
+    const [startH2, setStartH2] = useState(3);
+    const [startM1, setStartM1] = useState(3);
+    const [startM2, setStartM2] = useState(0);
+    const [startHMax, setStartHMax] = useState(9)
+    const [startMMax, setStartMMax] = useState(9)
+
+    const [endH1, setEndH1] = useState(0);
+    const [endH2, setEndH2] = useState(7);
+    const [endM1, setEndM1] = useState(3);
+    const [endM2, setEndM2] = useState(0);
+    const [endHMax, setEndHMax] = useState(9)
+    const [endMMax, setEndMMax] = useState(9)
     const step4YearInput = useInput(_today.getFullYear() + '-' + addZero(_today.getMonth() + 1) + '-' + addZero(_today.getDate()));
     const [step, setStep] = useState(0)
     const [sleepData, setSleepData] = useState({ rating: 3 })
 
+    useEffect(() => {
+        timeSet({ flag: "H", frontN: startH1, backNSetter: setStartH2, maxSetter: setStartHMax })
+        timeSet({ flag: "M", frontN: startM1, backNSetter: setStartM2, maxSetter: setStartMMax })
+        timeSet({ flag: "H", frontN: endH1, backNSetter: setEndH2, maxSetter: setEndHMax })
+        timeSet({ flag: "M", frontN: endM1, backNSetter: setEndM2, maxSetter: setEndMMax })
+
+    }, [startH1, startH2, startM1, startM2, endH1, endH2, endM1, endM2])
+
+    function timeSet({ flag, frontN, backNSetter, maxSetter }) {
+        if (flag === 'H') {
+            maxSetter(frontN === 2 ? 4 : 9);
+            backNSetter(curr => (frontN === 2) && (curr > 4) ? 4 : curr);
+        } else if (flag === 'M') {
+            maxSetter(frontN === 6 ? 0 : 9);
+            backNSetter(curr => (frontN === 6) ? 0 : curr);
+        }
+    }
+
+
+
     //수정할 데이터가 변경시 초기값 세팅
     useEffect(() => {
         if (sleepObj) {
-            step2HourInput.setValue(sleepObj.sleepStart.substr(0, 2));
-            step2MinuteInput.setValue(sleepObj.sleepStart.substr(2, 2));
-            step3HourInput.setValue(sleepObj.sleepEnd.substr(0, 2));
-            step3MinuteInput.setValue(sleepObj.sleepEnd.substr(2, 2));
+            const startT = sleepObj.sleepStart;
+            const endT = sleepObj.sleepEnd;
+            setStartH1(startT.substr(0,1));
+            setStartH2(startT.substr(1,1));
+            setStartM1(startT.substr(2,1));
+            setStartM2(startT.substr(3,1));
+            setEndH1(endT.substr(0,1));
+            setEndH2(endT.substr(1,1));
+            setEndM1(endT.substr(2,1));
+            setEndM2(endT.substr(3,1));
             step4YearInput.setValue(sleepObj.date.substr(0, 4) + '-' + sleepObj.date.substr(4, 2) + '-' + sleepObj.date.substr(6, 2));
             setSleepData(prev => { return { ...prev, rating: sleepObj.rating } })
-            // setSleepData({ ...sleepData, rating: sleepObj.rating })
             setStep(0)
             document.querySelectorAll('.add-data-step1-score').forEach(el => {
                 el.classList.remove('add-data-step1-selected', 'main-color')
@@ -40,16 +75,15 @@ const AddSleepData = ({ addSleep, user, callbaclFn, isNew, editId, sleepObj, set
             document.querySelector('.add-data-new .add-data-contents') :
             document.querySelector('.add-data-edit .add-data-contents')
         contentEl.style.marginLeft = -250 * step + 'px'
-        setSleepData(prev=>{
-            console.log(prev)
+        setSleepData(prev => {
             return {
                 ...prev,
-                sleepStart: step2HourInput.value + '' + step2MinuteInput.value,
-                sleepEnd: step3HourInput.value + '' + step3MinuteInput.value,
+                sleepStart: (startH1 + '' + startH2 + '' + startM1 + '' + startM2),
+                sleepEnd: (endH1 + '' + endH2 + '' + endM1 + '' + endM2),
                 date: step4YearInput.value.replaceAll('-', '')
             }
         })
-    }, [step, isNew ,step2HourInput.value,step2MinuteInput.value,step3HourInput.value,step3MinuteInput.value,step4YearInput.value])
+    }, [step, isNew])
 
     // 이전,다음 버튼 누를 때마다 세팅
     const onBtnClick = e => {
@@ -125,22 +159,27 @@ const AddSleepData = ({ addSleep, user, callbaclFn, isNew, editId, sleepObj, set
             </div>
             <div className='add-data-step2'>
                 <div className='add-data-step-text main-color'>몇시에 주무셨나요? <br />주무신 시간을 알려주세요</div>
-                <div className='add-data-step2-time'>
-                    <input className='add-data-step2-h' onChange={step2HourInput.onChange} value={step2HourInput.value} datatype='hour' /><span className='add-data-step2-tx main-color' >시</span>
-                    <input className='add-data-step2-m' onChange={step2MinuteInput.onChange} value={step2MinuteInput.value} datatype='minute' /><span className='add-data-step2-tx main-color' >분</span>
+                <div className='add-data-step2-time'><span></span>
+                    <NumberSlide val={startH1} setter={setStartH1} max='2' />
+                    <NumberSlide val={startH2} setter={setStartH2} max={startHMax} />
+                    <NumberSlide val={startM1} setter={setStartM1} max='6' />
+                    <NumberSlide val={startM2} setter={setStartM2} max={startMMax} />
                 </div>
             </div>
             <div className='add-data-step3'>
                 <div className='add-data-step-text main-color'>몇시에 일어나셨나요? <br />일어난 시간을 알려주세요</div>
-                <div className='add-data-step3-time'>
-                    <input className='add-data-step3-h' onChange={step3HourInput.onChange} value={step3HourInput.value} datatype='hour' /><span className='add-data-step3-tx main-color' >시</span>
-                    <input className='add-data-step3-m' onChange={step3MinuteInput.onChange} value={step3MinuteInput.value} datatype='minute' /><span className='add-data-step3-tx main-color' >분</span>
+                <div className='add-data-step3-time'><span></span>
+                    <NumberSlide val={endH1} setter={setEndH1} max='2' />
+                    <NumberSlide val={endH2} setter={setEndH2} max={endHMax} />
+                    <NumberSlide val={endM1} setter={setEndM1} max='6' />
+                    <NumberSlide val={endM2} setter={setEndM2} max={endMMax} />
                 </div>
             </div>
             <div className='add-data-step4'>
                 <div className='add-data-step-text main-color'>오늘이 맞나요?? <br />마지막으로 날짜를 확인해주세요</div>
                 <div className='add-data-step4-date'>
-                    <input className='add-data-step4-year main-color' onChange={step4YearInput.onChange} value={step4YearInput.value} datatype='year' />
+                    {/* <input className='add-data-step4-year main-color' onChange={step4YearInput.onChange} value={step4YearInput.value} datatype='year' /> */}
+                    <span className='add-data-step4-year main-color' >{_today.getFullYear() + '-' + addZero(_today.getMonth() + 1) + '-' + addZero(_today.getDate())}</span>
                 </div>
             </div>
             <div className='add-data-step5'>
