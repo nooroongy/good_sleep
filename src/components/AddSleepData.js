@@ -22,7 +22,7 @@ const AddSleepData = ({ addSleep, user, callbaclFn, isNew, editId, sleepObj, set
     const [endMMax, setEndMMax] = useState(9)
     const step4YearInput = useInput(_today.getFullYear() + '-' + addZero(_today.getMonth() + 1) + '-' + addZero(_today.getDate()));
     const [step, setStep] = useState(0)
-    const [sleepData, setSleepData] = useState({ rating: 3 })
+    const [sleepData, setSleepData] = useState({ rating: '3' })
 
     useEffect(() => {
         timeSet({ flag: "H", frontN: startH1, backNSetter: setStartH2, maxSetter: setStartHMax })

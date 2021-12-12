@@ -1,7 +1,6 @@
 import { connect } from "react-redux";
 import Card from "../components/Card";
 import { ACTION } from "../components/store";
-import { FB_DB } from "../components/_firebase";
 import '../css/home.css'
 
 const Home = ({ user, sleepData = [], connectSleepDB }) => {
@@ -22,6 +21,7 @@ const Home = ({ user, sleepData = [], connectSleepDB }) => {
         return str ? (diffH + 'H ' + diffM + 'M') : diffH * 60 + diffM
     }
 
+    //sleep for 를 추천하기위한 배열
     const sleepDataFor = sleepData.map(v => {
         return {
             rating: v.rating,
@@ -31,10 +31,16 @@ const Home = ({ user, sleepData = [], connectSleepDB }) => {
         }
     })
 
+    //bestTime 을 찾음
     let findBestTime = [];
-
     sleepDataFor.forEach(v => {
-        if (findBestTime.filter(time => time.time === v.sleepTimeStr).length === 0) findBestTime.push({ time: v.sleepTimeStr, score: 0 })
+        if (findBestTime.filter(time => time.time === v.sleepTimeStr).length === 0) {
+            findBestTime.push({ 
+                time: v.sleepTimeStr, 
+                score: 0, 
+                start: v.sleepStart.substr(0,2) + ':' +v.sleepStart.substr(2,2)
+            })
+        }
 
         findBestTime.forEach((times, i) => {
             if (times.time === v.sleepTimeStr) findBestTime[i].score += (v.rating - 3) * 1;
@@ -43,15 +49,15 @@ const Home = ({ user, sleepData = [], connectSleepDB }) => {
 
     findBestTime.sort((a, b) => b.score - a.score)
 
-    
-    const bestTime = findBestTime.length > 0 ? findBestTime[0].time :'';
+    const bestTime = findBestTime.length > 0 ? findBestTime[0].time : '';
+    const bestTimeAt = findBestTime.length > 0 ? findBestTime[0].start : '';
 
     return (<div className='home-wrap'>
         <div className='home-wrap-full'>
             <Card title={'time line'}>
                 <div className='home-graph-wrap'>
                     {sleepData.map(v => {
-                        const height = (getSleepTime(v.sleepStart, v.sleepEnd)-120) / 5;
+                        const height = (getSleepTime(v.sleepStart, v.sleepEnd) - 120) / 5;
                         return <span className='home-graph-data' key={v.id}>
                             <span className={'home-graph-bar home-graph-rating' + v.rating + ' home-graph-sleeptime sub-color'}
                                 style={{ height: height > 80 ? 80 : height + 'px' }}>
@@ -72,7 +78,7 @@ const Home = ({ user, sleepData = [], connectSleepDB }) => {
             </Card>
             <Card title={'sleep at'}>
                 <div className='home-at-you-wrap'>
-                    <span className='home-at-you-hour main-color'>23:00</span>
+                    <span className='home-at-you-hour main-color'>{bestTimeAt}</span>
                     {/* <span className='home-for-you-base'>123일간의 데이터를 기반으로 추천</span> */}
                 </div>
             </Card>
@@ -102,12 +108,12 @@ const Home = ({ user, sleepData = [], connectSleepDB }) => {
                         </span>
                         <span className='home-srore-time-tx'>time</span>
                         <span className='home-srore-rating-tx'>rating</span>
-                        {sleepData.map(v=>{
-                            const bottom = v.rating*30-5;
-                            const left = (getSleepTime(v.sleepStart, v.sleepEnd) -120)*2/3
+                        {sleepData.map(v => {
+                            const bottom = v.rating * 30 - 5;
+                            const left = (getSleepTime(v.sleepStart, v.sleepEnd) - 120) * 2 / 3 - 3
 
-                            return <span className='home-score-dot main-color'
-                                style={{bottom,left}}  key={v.id}
+                            return left > 320 ? '' : <span className='home-score-dot main-color'
+                                style={{ bottom, left }} key={v.id}
                             ></span>
                         })}
                     </div>
