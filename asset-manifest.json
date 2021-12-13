@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/good_sleep/static/css/main.a56760df.chunk.css",
-    "main.js": "/good_sleep/static/js/main.18776d72.chunk.js",
-    "main.js.map": "/good_sleep/static/js/main.18776d72.chunk.js.map",
+    "main.js": "/good_sleep/static/js/main.ef3a3176.chunk.js",
+    "main.js.map": "/good_sleep/static/js/main.ef3a3176.chunk.js.map",
     "runtime-main.js": "/good_sleep/static/js/runtime-main.daaddd36.js",
     "runtime-main.js.map": "/good_sleep/static/js/runtime-main.daaddd36.js.map",
     "static/js/2.470dbfe1.chunk.js": "/good_sleep/static/js/2.470dbfe1.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.daaddd36.js",
     "static/js/2.470dbfe1.chunk.js",
     "static/css/main.a56760df.chunk.css",
-    "static/js/main.18776d72.chunk.js"
+    "static/js/main.ef3a3176.chunk.js"
   ]
 }
