@@ -20,7 +20,8 @@ const AddSleepData = ({ addSleep, user, callbaclFn, isNew, editId, sleepObj, set
     const [endM2, setEndM2] = useState(0);
     const [endHMax, setEndHMax] = useState(9)
     const [endMMax, setEndMMax] = useState(9)
-    const step4YearInput = useInput(_today.getFullYear() + '-' + addZero(_today.getMonth() + 1) + '-' + addZero(_today.getDate()));
+
+    const [date, setDate] = useState(_today.getFullYear() + '' + addZero(_today.getMonth() + 1) + '' + addZero(_today.getDate()));
     const [step, setStep] = useState(0)
     const [sleepData, setSleepData] = useState({ rating: '3' })
 
@@ -49,15 +50,15 @@ const AddSleepData = ({ addSleep, user, callbaclFn, isNew, editId, sleepObj, set
         if (sleepObj) {
             const startT = sleepObj.sleepStart;
             const endT = sleepObj.sleepEnd;
-            setStartH1(startT.substr(0,1));
-            setStartH2(startT.substr(1,1));
-            setStartM1(startT.substr(2,1));
-            setStartM2(startT.substr(3,1));
-            setEndH1(endT.substr(0,1));
-            setEndH2(endT.substr(1,1));
-            setEndM1(endT.substr(2,1));
-            setEndM2(endT.substr(3,1));
-            step4YearInput.setValue(sleepObj.date.substr(0, 4) + '-' + sleepObj.date.substr(4, 2) + '-' + sleepObj.date.substr(6, 2));
+            setStartH1(startT.substr(0, 1));
+            setStartH2(startT.substr(1, 1));
+            setStartM1(startT.substr(2, 1));
+            setStartM2(startT.substr(3, 1));
+            setEndH1(endT.substr(0, 1));
+            setEndH2(endT.substr(1, 1));
+            setEndM1(endT.substr(2, 1));
+            setEndM2(endT.substr(3, 1));
+            setDate(sleepObj.date);
             setSleepData(prev => { return { ...prev, rating: sleepObj.rating } })
             setStep(0)
             document.querySelectorAll('.add-data-step1-score').forEach(el => {
@@ -80,7 +81,7 @@ const AddSleepData = ({ addSleep, user, callbaclFn, isNew, editId, sleepObj, set
                 ...prev,
                 sleepStart: (startH1 + '' + startH2 + '' + startM1 + '' + startM2),
                 sleepEnd: (endH1 + '' + endH2 + '' + endM1 + '' + endM2),
-                date: step4YearInput.value.replaceAll('-', '')
+                date: date
             }
         })
     }, [step, isNew])
@@ -92,7 +93,7 @@ const AddSleepData = ({ addSleep, user, callbaclFn, isNew, editId, sleepObj, set
             if (step > 0)
                 setStep(step - 1)
         } else {
-            if (step < 4)
+            if (step < 3)
                 setStep(step + 1)
             else {
                 if (isNew) {
@@ -175,54 +176,53 @@ const AddSleepData = ({ addSleep, user, callbaclFn, isNew, editId, sleepObj, set
                     <NumberSlide val={endM2} setter={setEndM2} max={endMMax} />
                 </div>
             </div>
-            <div className='add-data-step4'>
+            {/* <div className='add-data-step4'>
                 <div className='add-data-step-text main-color'>오늘이 맞나요?? <br />마지막으로 날짜를 확인해주세요</div>
                 <div className='add-data-step4-date'>
-                    {/* <input className='add-data-step4-year main-color' onChange={step4YearInput.onChange} value={step4YearInput.value} datatype='year' /> */}
                     <span className='add-data-step4-year main-color' >{_today.getFullYear() + '-' + addZero(_today.getMonth() + 1) + '-' + addZero(_today.getDate())}</span>
                 </div>
-            </div>
+            </div> */}
             <div className='add-data-step5'>
                 <div className='add-data-step-text main-color'>{isNew ? '등록' : '수정'}을 완료하시려면 <br />done 버튼을 클릭해주세요</div>
             </div>
         </div>
         <div className='add-data-btn-wrap'>
             <button className='add-data-btn sub-color font-color' onClick={onBtnClick}>prev</button>
-            <button className={'add-data-btn font-color ' + (step === 4 ? 'main-color' : 'sub-color')} onClick={onBtnClick}>{step === 4 ? 'done' : 'next'}</button>
+            <button className={'add-data-btn font-color ' + (step === 3 ? 'main-color' : 'sub-color')} onClick={onBtnClick}>{step === 3 ? 'done' : 'next'}</button>
         </div>
     </div>
 }
 
-const useInput = initialValue => {
-    const [value, setValue] = useState(initialValue);
-    const onChange = e => {
-        const { target: { value } } = e;
-        const { target: { attributes: { datatype } } } = e;
+// const useInput = initialValue => {
+//     const [value, setValue] = useState(initialValue);
+//     const onChange = e => {
+//         const { target: { value } } = e;
+//         const { target: { attributes: { datatype } } } = e;
 
-        if (datatype.value === 'hour' || datatype.value === 'minute') {
-            if (isNaN(value * 1)) return;
-            if (value.length > 2) return;
-            if ((datatype.value === 'hour' && value * 1 > 24) || (datatype.value === 'minute' && value * 1 > 60)) return;
-            setValue(value)
-        }
-        if (datatype.value === 'year') {
-            const year = value.substr(0, 4) * 1;
-            const month = value.substr(5, 2) * 1;
-            const date = value.substr(8,) * 1;
-            if (year !== new Date().getFullYear() * 1) return;
-            if (month !== (new Date().getMonth() + 1) * 1) return;
+//         if (datatype.value === 'hour' || datatype.value === 'minute') {
+//             if (isNaN(value * 1)) return;
+//             if (value.length > 2) return;
+//             if ((datatype.value === 'hour' && value * 1 > 24) || (datatype.value === 'minute' && value * 1 > 60)) return;
+//             setValue(value)
+//         }
+//         if (datatype.value === 'year') {
+//             const year = value.substr(0, 4) * 1;
+//             const month = value.substr(5, 2) * 1;
+//             const date = value.substr(8,) * 1;
+//             if (year !== new Date().getFullYear() * 1) return;
+//             if (month !== (new Date().getMonth() + 1) * 1) return;
 
-            function dateCheck(date) {
-                if ([1, 3, 5, 7, 8, 10, 12].indexOf(month) !== -1 && date < 32) return true;
-                if ([4, 6, 9, 11].indexOf(month) !== -1 && date < 31) return true;
-                if (month === 2 && date < 29) return true;
-                return false;
-            }
-            if (value.length > 7 && dateCheck(date)) setValue(value)
-        }
-    }
-    return { onChange, value, setValue }
-}
+//             function dateCheck(date) {
+//                 if ([1, 3, 5, 7, 8, 10, 12].indexOf(month) !== -1 && date < 32) return true;
+//                 if ([4, 6, 9, 11].indexOf(month) !== -1 && date < 31) return true;
+//                 if (month === 2 && date < 29) return true;
+//                 return false;
+//             }
+//             if (value.length > 7 && dateCheck(date)) setValue(value)
+//         }
+//     }
+//     return { onChange, value, setValue }
+// }
 
 const addZero = num => (num < 10 && num * 1 !== 0) ? '0' + num : num
 

@@ -77,9 +77,9 @@ function App({ setUser, connectSleepDB, connectThemeDB, colorSet }) {
         <BrowserRouter>
           <Header isLogedIn={isLogedIn} />
           <Routes>
-            <Route path='/*' element={<Home />}></Route>
-            <Route path='/record' element={<Record />}></Route>
-            <Route path='/setting' element={<Setting />}></Route>
+            <Route path='good_sleep/*' element={<Home />}></Route>
+            <Route path='good_sleep/record' element={<Record />}></Route>
+            <Route path='good_sleep/setting' element={<Setting />}></Route>
           </Routes>
           <Footer />
         </BrowserRouter>
