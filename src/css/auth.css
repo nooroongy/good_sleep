@@ -44,14 +44,14 @@
 .auth__btn{
     border: none;
     margin: 24px;
-    height: 14vw;
-    width: 28vw;
+    height: min(14vw,99px);
+    width: min(28vw,180px);
     box-shadow: 0 0 9px 5px #00000014;
-    border-radius: 3vw;
+    border-radius: min(3vw,20px);
     cursor: pointer;
     background: #69b5c9;
-    color: #ffffffe8;    
-    font-size: 3.1vw;
+    color: #ffffffe8;
+    font-size: min(3.1vw,23px);
 }
 
 .auth__logo{
@@ -63,9 +63,10 @@
     display: inline-block;
     width: 100vw;
     height: 50vw;
-    top: calc(35vh);
-    font-size: 15vw;
+    top: 35vh;
+    font-size:  min(15vw,95px);
     text-align: center;
     font-weight: bold;
     font-family: 'Rubik Puddles';
+    
 }
