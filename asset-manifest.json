@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/good_sleep/static/css/main.dc30b99d.chunk.css",
-    "main.js": "/good_sleep/static/js/main.15a4751b.chunk.js",
-    "main.js.map": "/good_sleep/static/js/main.15a4751b.chunk.js.map",
+    "main.js": "/good_sleep/static/js/main.b1924257.chunk.js",
+    "main.js.map": "/good_sleep/static/js/main.b1924257.chunk.js.map",
     "runtime-main.js": "/good_sleep/static/js/runtime-main.daaddd36.js",
     "runtime-main.js.map": "/good_sleep/static/js/runtime-main.daaddd36.js.map",
-    "static/js/2.2fdd4e69.chunk.js": "/good_sleep/static/js/2.2fdd4e69.chunk.js",
-    "static/js/2.2fdd4e69.chunk.js.map": "/good_sleep/static/js/2.2fdd4e69.chunk.js.map",
+    "static/js/2.8cb50f7a.chunk.js": "/good_sleep/static/js/2.8cb50f7a.chunk.js",
+    "static/js/2.8cb50f7a.chunk.js.map": "/good_sleep/static/js/2.8cb50f7a.chunk.js.map",
     "index.html": "/good_sleep/index.html",
     "static/css/main.dc30b99d.chunk.css.map": "/good_sleep/static/css/main.dc30b99d.chunk.css.map",
-    "static/js/2.2fdd4e69.chunk.js.LICENSE.txt": "/good_sleep/static/js/2.2fdd4e69.chunk.js.LICENSE.txt"
+    "static/js/2.8cb50f7a.chunk.js.LICENSE.txt": "/good_sleep/static/js/2.8cb50f7a.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.daaddd36.js",
-    "static/js/2.2fdd4e69.chunk.js",
+    "static/js/2.8cb50f7a.chunk.js",
     "static/css/main.dc30b99d.chunk.css",
-    "static/js/main.15a4751b.chunk.js"
+    "static/js/main.b1924257.chunk.js"
   ]
 }
