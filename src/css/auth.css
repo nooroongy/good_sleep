@@ -1,9 +1,41 @@
+.auth__wrap{
+    background: linear-gradient(to right bottom, #2193b0, #6dd5ed);
+    width: 100vw;
+    height: 100vh;
+}
+
+.auth__background{    
+    width: 130vw;
+    height: 130vw;
+    border-radius: 65vw;
+    background-color: #f2f2f2;
+    display: inline-block;
+    position: fixed;
+    left: -15vw;
+    top: calc(50vh - 63vw);
+    transition: 1s;
+    transform: scale(0);
+    transition-timing-function: cubic-bezier(0.58, 0.04, 0.28, 1.88);
+}
+
+.auth__start .auth__background{
+    transform: scale(1);
+}
+
+.auth__wrap *:not(.auth__background){
+    transition: 1s;
+    opacity: 0;
+}
+
+.auth__start *:not(.auth__background){
+    opacity: 1;
+}
+
 .auth__btn_wrap{
     position: fixed;
-    left: calc(50vw - 250px);
-    top: calc(50vh - 40px);
-    width: 500px;
-    height: 80px;
+    top: 45vh;
+    width: 100vw;
+    height: 20vw;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -12,13 +44,14 @@
 .auth__btn{
     border: none;
     margin: 24px;
-    height: 58px;
-    width: 117px;
+    height: 14vw;
+    width: 28vw;
     box-shadow: 0 0 9px 5px #00000014;
-    border-radius: 10px;
+    border-radius: 3vw;
     cursor: pointer;
     background: #69b5c9;
-    color: #ffffffe8;
+    color: #ffffffe8;    
+    font-size: 3.1vw;
 }
 
 .auth__logo{
@@ -28,11 +61,10 @@
     background-clip: text !important;
     position: fixed;
     display: inline-block;
-    width: 500px;
-    height: 100px;
-    left: calc(50vw - 250px);
-    top: calc(50vh - 130px);
-    font-size: 3.4em;
+    width: 100vw;
+    height: 50vw;
+    top: calc(35vh);
+    font-size: 15vw;
     text-align: center;
     font-weight: bold;
     font-family: 'Rubik Puddles';

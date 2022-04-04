@@ -26,6 +26,7 @@ function colorSetRest() {
 function App({ setUser, connectSleepDB, connectThemeDB, colorSet }) {
   const [isLogedIn, setIsLogedIn] = useState(false); // 로그인중인지
   const [isLoading, setIsLoading] = useState(true); // 로딩중인지
+  const [isDemo, setIsDemo] = useState(false);
 
   colorSetRest();
   document.getElementById('root').classList.add(`color-main-${colorSet.mainColor}`)
@@ -39,36 +40,41 @@ function App({ setUser, connectSleepDB, connectThemeDB, colorSet }) {
     FB_AUTH.authChange(user => {
       //user정보가 있을때
       if (user) {
-        setIsLogedIn(true);
-        const { displayName, uid, email } = user;
-        setUser({ displayName, uid, email })
-
-        //sleep data DB에 연결
-        FB_DB.get('sleep').then(res => {
-          connectSleepDB(res.filter(data => data.uid === user.uid))
-          setIsLoading(false);
-        })
-
-        //theme data DB에 연결
-        FB_DB.get('colorSet').then(res => {
-          const themeData = res.filter(data => data.uid === user.uid);
-          if (themeData.length === 0) {
-            FB_DB.add("colorSet", {
-              mainColor: '01',
-              subColor: '01',
-              fontColor: '01',
-              themeColor: '01',
-              uid: user.uid
-            });
-          } else {
-            connectThemeDB(themeData[0])
-          }
-        })
+        connectData(user)
       }
       //user정보가 없을 때
       else { setIsLogedIn(false); setIsLoading(false); }
     })
-  }, [connectSleepDB,setUser,connectThemeDB])
+  }, [connectSleepDB, setUser, connectThemeDB])
+
+  const connectData = (user) => {
+    console.log(user)
+    setIsLogedIn(true);
+    const { displayName, uid, email } = user;
+    setUser({ displayName, uid, email })
+
+    //sleep data DB에 연결
+    FB_DB.get('sleep').then(res => {
+      connectSleepDB(res.filter(data => data.uid === user.uid))
+      setIsLoading(false);
+    })
+
+    //theme data DB에 연결
+    FB_DB.get('colorSet').then(res => {
+      const themeData = res.filter(data => data.uid === user.uid);
+      if (themeData.length === 0) {
+        FB_DB.add("colorSet", {
+          mainColor: '01',
+          subColor: '01',
+          fontColor: '01',
+          themeColor: '01',
+          uid: user.uid
+        });
+      } else {
+        connectThemeDB(themeData[0])
+      }
+    })
+  }
 
   return (
     isLoading ?
@@ -84,7 +90,7 @@ function App({ setUser, connectSleepDB, connectThemeDB, colorSet }) {
           <Footer />
         </BrowserRouter>
         :
-        <Auth />
+        <Auth setIsDemo={setIsDemo} />
   );
 }
 
