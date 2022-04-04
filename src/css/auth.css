@@ -1,0 +1,39 @@
+.auth__btn_wrap{
+    position: fixed;
+    left: calc(50vw - 250px);
+    top: calc(50vh - 40px);
+    width: 500px;
+    height: 80px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth__btn{
+    border: none;
+    margin: 24px;
+    height: 58px;
+    width: 117px;
+    box-shadow: 0 0 9px 5px #00000014;
+    border-radius: 10px;
+    cursor: pointer;
+    background: #69b5c9;
+    color: #ffffffe8;
+}
+
+.auth__logo{
+    background: linear-gradient(to right bottom, #2193b0, #6dd5ed);
+    color: transparent;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    position: fixed;
+    display: inline-block;
+    width: 500px;
+    height: 100px;
+    left: calc(50vw - 250px);
+    top: calc(50vh - 130px);
+    font-size: 3.4em;
+    text-align: center;
+    font-weight: bold;
+    font-family: 'Rubik Puddles';
+}
