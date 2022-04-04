@@ -2,9 +2,14 @@ import { connect } from 'react-redux'
 import { FB_AUTH } from './_firebase'
 import '../css/header.css'
 
-const Header = ({user,isLogedIn}) => {
+const Header = ({user,isLogedIn,isDemo,setDemo}) => {
     function onClickSignBtn(){
-        FB_AUTH.signOut()
+        if(isDemo){
+            setDemo(false)
+        }else{
+            FB_AUTH.signOut()
+        }
+            
     }
 
     return (<div className='header-wrap main-color'>

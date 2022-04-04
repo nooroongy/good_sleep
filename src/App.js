@@ -13,6 +13,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Record from './routes/Record'
 import Setting from './routes/Setting';
+import { configureStore } from '@reduxjs/toolkit';
 
 function colorSetRest() {
   ['01', '02', '03', '04', '05', '06', '07', '08'].forEach(no => {
@@ -41,17 +42,24 @@ function App({ setUser, connectSleepDB, connectThemeDB, colorSet }) {
       //user정보가 있을때
       if (user) {
         connectData(user)
+      } else if (isDemo) {
+        connectData()
       }
       //user정보가 없을 때
       else { setIsLogedIn(false); setIsLoading(false); }
     })
-  }, [connectSleepDB, setUser, connectThemeDB])
+  }, [connectSleepDB, setUser, connectThemeDB, isDemo])
 
-  const connectData = (user) => {
-    console.log(user)
+  const connectData = (user = {}) => {
     setIsLogedIn(true);
     const { displayName, uid, email } = user;
-    setUser({ displayName, uid, email })
+
+    if (isDemo) {
+      setUser({ displayName: 'Demo', uid: 'VoblfBUl7kbD32O4xD0nvWaqZDa2', email })
+      user.uid = 'VoblfBUl7kbD32O4xD0nvWaqZDa2'
+    } else {
+      setUser({ displayName, uid, email })
+    }
 
     //sleep data DB에 연결
     FB_DB.get('sleep').then(res => {
@@ -81,7 +89,7 @@ function App({ setUser, connectSleepDB, connectThemeDB, colorSet }) {
       <Loading /> :
       isLogedIn ?
         <BrowserRouter>
-          <Header isLogedIn={isLogedIn} />
+          <Header isLogedIn={isLogedIn} isDemo={isDemo} setDemo={setIsDemo} />
           <Routes>
             <Route path='good_sleep/*' element={<Home />}></Route>
             <Route path='good_sleep/record' element={<Record />}></Route>
