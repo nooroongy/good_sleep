@@ -19,7 +19,6 @@ const Home = ({ bestTime, bestTimeAt, dataForBarGrahp, dataForDotGraph }) => {
 
     const selectRandomTip = (res) => {
         const tipLength = res.length;
-
         const randomNum = Math.floor(Math.random() * 10 * tipLength) % tipLength;
         setSelectedTipIndex(randomNum);
     }
@@ -39,13 +38,11 @@ const Home = ({ bestTime, bestTimeAt, dataForBarGrahp, dataForDotGraph }) => {
             <Card title={'sleep for'}>
                 <div className='home-for-you-wrap'>
                     <span className='home-for-you-hour main-color'>{bestTime}</span>
-                    {/* <span className='home-for-you-base'>123일간의 데이터를 기반으로 추천</span> */}
                 </div>
             </Card>
             <Card title={'sleep at'}>
                 <div className='home-at-you-wrap'>
                     <span className='home-at-you-hour main-color'>{bestTimeAt}</span>
-                    {/* <span className='home-for-you-base'>123일간의 데이터를 기반으로 추천</span> */}
                 </div>
             </Card>
         </div>

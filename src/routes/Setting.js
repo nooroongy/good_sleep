@@ -15,29 +15,26 @@ const Setting = ({ updateColorSet, colorSet }) => {
     }
 
     const noSet = {
-        main: ['00', '01', '02', '03', '04',
-            '05', '06', '07', '08'],
-        sub: ['00', '01', '02', '03', '04',
-            '05', '06', '07', '08'],
+        main: ['00', '01', '02', '03', '04', '05', '06', '07', '08'],
+        sub: ['00', '01', '02', '03', '04', '05', '06', '07', '08'],
         theme: ['01', '02', '03', '04'],
         font: ['01', '02', '03', '04']
     }
 
     return <div className='setting-wrap'>
         <Card title={'Color'}>
-            <div className='setting-pallet-category'>main</div>
+            <div className='setting-pallet-category'>main color</div>
             <Pallet category={'main'} noSet={noSet.main}></Pallet>
-            <div className='setting-pallet-category'>sub</div>
+            <div className='setting-pallet-category'>sub color</div>
             <Pallet category={'sub'} noSet={noSet.sub}></Pallet>
-            <div className='setting-pallet-category'>theme</div>
+            <div className='setting-pallet-category'>background</div>
             <Pallet category={'theme'} noSet={noSet.theme}></Pallet>
-            <div className='setting-pallet-category'>font</div>
+            <div className='setting-pallet-category'>font color</div>
             <Pallet category={'font'} noSet={noSet.font}></Pallet>
         </Card>
         <Link to='good_sleep'>
             <button onClick={saveSetting} className='setting-save-btn main-color font-color'>save</button>
         </Link>
-
     </div>
 }
 

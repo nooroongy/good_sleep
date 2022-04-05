@@ -5,14 +5,14 @@
 }
 
 .auth__background{    
-    width: 130vw;
-    height: 130vw;
-    border-radius: 65vw;
+    width: min(115vw,115vh);
+    height: min(115vw,115vh);
+    border-radius: min(60vw,60vh);
     background-color: #f2f2f2;
     display: inline-block;
     position: fixed;
-    left: -15vw;
-    top: calc(50vh - 63vw);
+    left: calc(50vw - min(115vw,115vh)/2);
+    top: calc(50vh - min(115vw,115vh)/2);
     transition: 1s;
     transform: scale(0);
     transition-timing-function: cubic-bezier(0.58, 0.04, 0.28, 1.88);
@@ -44,14 +44,14 @@
 .auth__btn{
     border: none;
     margin: 24px;
-    height: min(14vw,99px);
-    width: min(28vw,180px);
+    height: min(15vw,99px);
+    width: min(27vw,180px);
     box-shadow: 0 0 9px 5px #00000014;
-    border-radius: min(3vw,20px);
+    border-radius: min(4.5vw,20px);
     cursor: pointer;
     background: #69b5c9;
     color: #ffffffe8;
-    font-size: min(3.1vw,23px);
+    font-size: min(3.3vw,23px);
 }
 
 .auth__logo{
