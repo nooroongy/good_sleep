@@ -13,53 +13,42 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Record from './routes/Record'
 import Setting from './routes/Setting';
-import { configureStore } from '@reduxjs/toolkit';
-
-function colorSetRest() {
-  ['01', '02', '03', '04', '05', '06', '07', '08'].forEach(no => {
-    document.getElementById('root').classList.remove('color-main-' + no)
-    document.getElementById('root').classList.remove('color-sub-' + no)
-    document.getElementById('root').classList.remove('color-font-' + no)
-    document.getElementById('root').classList.remove('color-theme-' + no)
-  })
-}
 
 function App({ setUser, connectSleepDB, connectThemeDB, colorSet }) {
   const [isLogedIn, setIsLogedIn] = useState(false); // 로그인중인지
   const [isLoading, setIsLoading] = useState(true); // 로딩중인지
-  const [isDemo, setIsDemo] = useState(false);
-
-  colorSetRest();
-  document.getElementById('root').classList.add(`color-main-${colorSet.mainColor}`)
-  document.getElementById('root').classList.add(`color-sub-${colorSet.subColor}`)
-  document.getElementById('root').classList.add(`color-font-${colorSet.fontColor}`)
-  document.getElementById('root').classList.add(`color-theme-${colorSet.themeColor}`)
+  const [isDemo, setIsDemo] = useState(false); // 데모모드인지
 
   //app 시작시 초기 세팅
   useEffect(() => {
-    //로그인시 user정보 세팅
+    isDemo ?
+      startDemoMode() :
+      onAuthChange()
+  }, [isDemo])
+
+  useEffect(() => {
+    colorSetInit(colorSet);
+  }, [colorSet])
+
+  //로그인시 user정보 세팅
+  const onAuthChange = () => {
     FB_AUTH.authChange(user => {
       //user정보가 있을때
-      if (user) {
-        connectData(user)
-      } else if (isDemo) {
-        connectData()
-      }
+      if (user) { connectData(user) }
       //user정보가 없을 때
       else { setIsLogedIn(false); setIsLoading(false); }
     })
-  }, [connectSleepDB, setUser, connectThemeDB, isDemo])
+  }
+
+  const startDemoMode = () => {
+    connectData({ displayName: 'Demo', uid: 'demo__uid', email: '' })
+  }
 
   const connectData = (user = {}) => {
     setIsLogedIn(true);
     const { displayName, uid, email } = user;
 
-    if (isDemo) {
-      setUser({ displayName: 'Demo', uid: 'VoblfBUl7kbD32O4xD0nvWaqZDa2', email })
-      user.uid = 'VoblfBUl7kbD32O4xD0nvWaqZDa2'
-    } else {
-      setUser({ displayName, uid, email })
-    }
+    setUser({ displayName, uid, email })
 
     //sleep data DB에 연결
     FB_DB.get('sleep').then(res => {
@@ -82,6 +71,20 @@ function App({ setUser, connectSleepDB, connectThemeDB, colorSet }) {
         connectThemeDB(themeData[0])
       }
     })
+  }
+
+  const colorSetInit = (colorSet) => {
+    ['01', '02', '03', '04', '05', '06', '07', '08'].forEach(no => {
+      document.getElementById('root').classList.remove('color-main-' + no)
+      document.getElementById('root').classList.remove('color-sub-' + no)
+      document.getElementById('root').classList.remove('color-font-' + no)
+      document.getElementById('root').classList.remove('color-theme-' + no)
+    })
+
+    document.getElementById('root').classList.add(`color-main-${colorSet.mainColor}`)
+    document.getElementById('root').classList.add(`color-sub-${colorSet.subColor}`)
+    document.getElementById('root').classList.add(`color-font-${colorSet.fontColor}`)
+    document.getElementById('root').classList.add(`color-theme-${colorSet.themeColor}`)
   }
 
   return (

@@ -1,0 +1,50 @@
+.graph__wrap {
+    /* height: 175px; */
+    height: 115px;
+    display: flex;
+    padding: 2px 20px;
+}
+
+.graph__data {
+    display: grid;
+    align-items: end;
+    grid-template-rows: 4fr 1.1fr;
+}
+
+.graph__bar {
+    display: inline-block;
+    width: 11px;
+    margin-right: 2px;
+    margin-bottom: 12px;
+}
+
+.graph__rating1 {
+    opacity: 0.3;
+}
+
+.graph__rating2 {
+    opacity: 0.45;
+}
+
+.graph__rating3 {
+    opacity: 0.6;
+}
+
+.graph__rating4 {
+    opacity: 0.75;
+}
+
+.graph__rating5 {
+    opacity: 9;
+}
+
+.graph__date {
+    font-weight: 300;
+    font-size: 0.6em;
+    letter-spacing: -0.1em;
+    transform: rotate(270deg) translate(-7px, 1px);
+    display: inline-block;
+    width: 13px;
+    color: #cbcbcb;
+    letter-spacing: -1.5px;
+}

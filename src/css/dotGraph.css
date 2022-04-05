@@ -1,0 +1,178 @@
+.dotgraph__wrap {
+    width: 85vw;
+    max-width: 385px;
+    height: 200px;
+    overflow: hidden;
+}
+
+.dotgraph__box {
+    width: 320px;
+    height: 150px;
+    margin: auto;
+    border-left: 2px solid #0000005c;
+    border-bottom: 2px solid #0000005c;
+    margin-top: 28px;
+    position: relative;
+    transform: scale(0.85);
+}
+
+.dotgraph__horizontal-line {
+    width: 100%;
+    height: 1px;
+    /* background-color: #8080804d; */
+    background: inherit;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.dotgraph__horizontal-line:nth-child(2) {
+    transform: translateY(30px);
+}
+
+.dotgraph__horizontal-line:nth-child(3) {
+    transform: translateY(60px);
+}
+
+.dotgraph__horizontal-line:nth-child(4) {
+    transform: translateY(90px);
+}
+
+.dotgraph__horizontal-line:nth-child(5) {
+    transform: translateY(120px);
+}
+
+.dotgraph__horizontal-line::after {
+    position: absolute;
+    bottom: -14px;
+    font-size: 1.1em;
+    left: -23px;
+    font-family: 'Material Icons';
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    background: inherit;
+}
+
+.dotgraph__horizontal-line:nth-child(5)::after {
+    content: 'sick';
+}
+
+.dotgraph__horizontal-line:nth-child(4)::after {
+    content: 'mood_bad';
+}
+
+.dotgraph__horizontal-line:nth-child(3)::after {
+    content: 'sentiment_satisfied';
+}
+
+.dotgraph__horizontal-line:nth-child(2)::after {
+    content: 'mood';
+}
+
+.dotgraph__horizontal-line:nth-child(1)::after {
+    content: 'emoji_emotions';
+}
+
+.dotgraph__vertical-line {
+    height: 100%;
+    width: 1px;
+    background: inherit;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.dotgraph__vertical-line:nth-child(1) {
+    transform: translateX(40px);
+}
+
+.dotgraph__vertical-line:nth-child(2) {
+    transform: translateX(80px);
+}
+
+.dotgraph__vertical-line:nth-child(3) {
+    transform: translateX(120px);
+}
+
+.dotgraph__vertical-line:nth-child(4) {
+    transform: translateX(160px);
+}
+
+.dotgraph__vertical-line:nth-child(5) {
+    transform: translateX(200px);
+}
+
+.dotgraph__vertical-line:nth-child(6) {
+    transform: translateX(240px);
+}
+
+.dotgraph__vertical-line:nth-child(7) {
+    transform: translateX(280px);
+}
+
+.dotgraph__vertical-line:nth-child(8) {
+    transform: translateX(319px);
+}
+
+.dotgraph__vertical-line::after {
+    position: absolute;
+    bottom: -19px;
+    font-size: 0.7em;
+    left: -14px;
+}
+
+.dotgraph__vertical-line:nth-child(1)::after {
+    content: '3H';
+}
+
+.dotgraph__vertical-line:nth-child(2)::after {
+    content: '4H';
+}
+
+.dotgraph__vertical-line:nth-child(3)::after {
+    content: '5H';
+}
+
+.dotgraph__vertical-line:nth-child(4)::after {
+    content: '6H';
+}
+
+.dotgraph__vertical-line:nth-child(5)::after {
+    content: '7H';
+}
+
+.dotgraph__vertical-line:nth-child(6)::after {
+    content: '8H';
+}
+
+.dotgraph__vertical-line:nth-child(7)::after {
+    content: '9H';
+}
+
+.dotgraph__vertical-line:nth-child(8)::after {
+    content: '10H';
+}
+
+.dotgraph__time-tx {
+    font-size: 0.7em;
+    position: absolute;
+    bottom: -13px;
+    right: -32px;
+    transform: rotate(90deg);
+}
+
+.dotgraph__rating-tx {
+    font-size: 0.7em;
+    position: absolute;
+    top: -22px;
+    left: -19px;
+}
+
+.dotgraph__dot {
+    width: 7px;
+    height: 7px;
+    position: absolute;
+    z-index: 2;
+    transform: rotate(45deg);
+}
